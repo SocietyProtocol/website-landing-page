@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "figma": {
+      "command": "npx",
+      "args": ["@anthropics/mcp-server-figma@latest"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--executable-path", "/usr/bin/chromium",
+        "--caps", "vision",
+        "--viewport-size", "1440x900"
+      ]
+    }
+  }
+}

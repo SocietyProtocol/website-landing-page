@@ -1,0 +1,32 @@
+name: Deploy to IPFS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Gatsby site
+        run: npx gatsby build
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to Fleek
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: npx @fleek-platform/cli sites deploy
+        env:
+          FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}

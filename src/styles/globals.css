@@ -1,0 +1,111 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "PP Telegraf";
+  src: url("/fonts/pptelegraf-ultralight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Telegraf";
+  src: url("/fonts/pptelegraf-regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Telegraf";
+  src: url("/fonts/pptelegraf-ultrabold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-VariableFont_opszwght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Italic-VariableFont_opszwght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --font-inter: "Inter", sans-serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --font-space-mono: "Space Mono", monospace;
+  --font-pp-telegraf: "PP Telegraf", "Space Grotesk", sans-serif;
+  --font-denim-ink: "Denim INK TRIAL", sans-serif;
+}
+
+@theme inline {
+  /* Colors */
+  --color-bg-primary: #0c0f16;
+  --color-bg-secondary: #1e2632;
+  --color-bg-card: #10141a;
+  --color-bg-card-alt: #181c22;
+  --color-bg-card-hover: #2c3442;
+  --color-bg-dark: #151515;
+  --color-bg-footer: #000000;
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #adadad;
+  --color-text-muted: #7a7a7a;
+  --color-text-light: #bfbcbc;
+
+  --color-accent-cyan: #0ab6d4;
+  --color-border-default: #656464;
+
+  /* Fonts */
+  --font-heading: var(--font-space-grotesk), "Space Grotesk", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
+  --font-mono: var(--font-space-mono), "Space Mono", monospace;
+  --font-display: var(--font-pp-telegraf), "PP Telegraf", "Space Grotesk", sans-serif;
+  --font-logo: var(--font-denim-ink), "Denim INK TRIAL", sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #0c0f16, #1e2632);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Video sidebar scrollbar - only show gap when scrollable */
+.video-sidebar {
+  scrollbar-width: none;
+  scrollbar-color: #64666E rgba(137, 137, 137, 0.2);
+}
+.video-sidebar.is-scrollable {
+  padding-right: 2.5rem;
+  scrollbar-width: thin;
+}
+.video-sidebar::-webkit-scrollbar {
+  width: 0;
+}
+.video-sidebar.is-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+.video-sidebar::-webkit-scrollbar-track {
+  background: rgba(137, 137, 137, 0.2);
+  border-radius: 9999px;
+}
+.video-sidebar::-webkit-scrollbar-thumb {
+  background: #64666E;
+  border-radius: 9999px;
+}
+
