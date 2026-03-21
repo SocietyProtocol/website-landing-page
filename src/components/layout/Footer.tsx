@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="relative bg-bg-footer text-text-primary overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-8 pt-20 pb-10">
         {/* Top section: columns + email */}
-        <div className="grid grid-cols-2 md:grid-cols-[auto_auto_auto_auto] gap-x-12 gap-y-10 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[auto_auto_auto_auto] gap-x-12 gap-y-10 mb-16">
           {footerColumns.map((col) => (
             <div key={col.title}>
               <h4 className="font-display text-[25px] text-text-muted mb-8">
@@ -17,21 +17,12 @@ export default function Footer() {
               <ul className="space-y-4">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    {link.href === "#" ? (
-                      <a
-                        href="#"
-                        className="font-display text-[21px] text-text-muted hover:text-text-primary transition-colors"
-                      >
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link
-                        href={link.href}
-                        className="font-display text-[21px] text-text-muted hover:text-text-primary transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    )}
+                    <Link
+                      href={link.href}
+                      className="font-display text-[21px] text-text-muted hover:text-text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -39,7 +30,7 @@ export default function Footer() {
           ))}
 
           {/* Stay Updated */}
-          <div>
+          <div className="max-w-[300px] lg:max-w-none">
             <h4 className="font-display text-[25px] text-text-muted mb-8">
               STAY UPDATED
             </h4>
@@ -48,12 +39,12 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="EMAIL ADDRESS"
-                  className="bg-transparent font-display text-[25px] text-text-muted placeholder:text-text-muted flex-1 outline-none"
+                  className="bg-transparent font-display text-[16px] lg:text-[25px] text-text-muted placeholder:text-text-muted flex-1 min-w-0 outline-none"
                 />
-                <span className="text-[#CFCFCF] mx-2 font-display text-[25px]">|</span>
+                <span className="text-[#CFCFCF] mx-2 font-display text-[16px] lg:text-[25px]">|</span>
                 <button
                   type="submit"
-                  className="font-display text-[25px] text-[#CFCFCF] hover:text-white transition-colors"
+                  className="font-display text-[16px] lg:text-[25px] text-[#CFCFCF] hover:text-white transition-colors shrink-0"
                 >
                   SUBMIT
                 </button>

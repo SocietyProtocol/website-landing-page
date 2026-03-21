@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   },
   description:
     "A decentralized protocol for building the foundations of a new social contract.",
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -25,10 +28,6 @@ export default function RootLayout({
           rel="preconnect"
           href="https://fonts.gstatic.com"
           crossOrigin=""
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400&display=swap"
         />
       </head>
       <body>

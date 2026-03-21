@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { articles } from "@/data/articles";
+import Image from "next/image";
+import { getAllPosts } from "@/lib/mdx";
 
 export const metadata: Metadata = { title: "Articles" };
 
 export default function Articles() {
-  const featuredArticles = articles.slice(0, 3);
-  const displayArticles = articles.slice(3, 9);
+  const allPosts = getAllPosts();
+  const featuredArticles = allPosts.slice(0, 3);
+  const displayArticles = allPosts.slice(3, 9);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-repeat-y bg-top bg-[length:100%_auto]" style={{ backgroundImage: "url(/images/group-131-bg.png)" }}>
       {/* 1. Hero */}
       <section className="max-w-[1400px] mx-auto px-8 pt-36 pb-24">
         <span className="font-mono text-[18px] tracking-widest text-[#7A7A7A] mb-10 block">
@@ -46,6 +48,7 @@ export default function Articles() {
       </section>
 
       {/* 2. Featured Articles */}
+      {featuredArticles.length > 0 && (
       <section className="max-w-[1400px] mx-auto px-8 pb-40">
         <div className="rounded-[40px] bg-[#10141A] border border-[#6B6B6B] p-8 md:p-12">
           {/* Navigation arrows */}
@@ -93,10 +96,12 @@ export default function Articles() {
                 className="group block"
               >
                 <div className="relative aspect-[428/599] rounded-[19px] overflow-hidden">
-                  <img
-                    src={article.image}
+                  <Image
+                    src={article.cardImage || article.image}
                     alt={article.title}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div
                     className="absolute inset-0"
@@ -119,6 +124,7 @@ export default function Articles() {
           </div>
         </div>
       </section>
+      )}
 
       {/* 3. Blog Intro */}
       <section className="max-w-[1400px] mx-auto px-8 pb-12">
@@ -132,6 +138,7 @@ export default function Articles() {
       </section>
 
       {/* 4. Article Cards Grid */}
+      {displayArticles.length > 0 && (
       <section className="max-w-[1400px] mx-auto px-8 pb-32">
         <div className="rounded-[40px] bg-[#10141A] border border-[#6B6B6B] p-8 md:p-12">
           <div className="grid md:grid-cols-3 gap-x-6 gap-y-12">
@@ -142,10 +149,12 @@ export default function Articles() {
                   className="group block"
                 >
                   <div className="relative rounded-[38px] bg-[#2c3442] overflow-hidden aspect-[420/270] mb-4 border border-dashed border-[#6B6B6B]">
-                    <img
-                      src={article.image}
+                    <Image
+                      src={article.cardImage || article.image}
                       alt={article.title}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                   </div>
@@ -167,6 +176,13 @@ export default function Articles() {
           </div>
         </div>
       </section>
+      )}
+
+      {allPosts.length === 0 && (
+        <section className="max-w-[1400px] mx-auto px-8 pb-32">
+          <p className="font-body text-[20px] text-[#7A7A7A]">No articles yet. Check back soon.</p>
+        </section>
+      )}
     </div>
   );
 }

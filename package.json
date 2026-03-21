@@ -9,22 +9,33 @@
     "tinacms": "tinacms dev -c \"next dev\""
   },
   "dependencies": {
-    "@tinacms/cli": "^2.1.6",
+    "@tailwindcss/typography": "^0.5.19",
     "gray-matter": "^4.0.3",
     "next": "^15.1.0",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
+    "panzoom": "^9.4.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tinacms": "^3.5.0"
+    "tinacms": "^3.6.1"
+  },
+  "overrides": {
+    "@headlessui/react": "^2.2.9",
+    "react-final-form": "^7.0.0",
+    "dompurify": "^3.3.3",
+    "react-router": "^6.30.2",
+    "react-router-dom": "^6.30.2",
+    "esbuild": "^0.25.0",
+    "vite": "^6.2.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^0.1.0",
+    "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@tinacms/cli": "^2.1.9",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^10.0.0",
-    "eslint-config-next": "^12.0.4",
+    "eslint": "^9",
+    "eslint-config-next": "^15",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

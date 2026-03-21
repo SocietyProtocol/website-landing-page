@@ -1,4 +1,6 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400&display=swap");
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @font-face {
   font-family: "PP Telegraf";
@@ -107,5 +109,24 @@ html {
 .video-sidebar::-webkit-scrollbar-thumb {
   background: #64666E;
   border-radius: 9999px;
+}
+
+/* Floating index scrollbar */
+.floating-index-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #505050 transparent;
+}
+.floating-index-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.floating-index-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.floating-index-scroll::-webkit-scrollbar-thumb {
+  background: #505050;
+  border-radius: 9999px;
+}
+.floating-index-scroll::-webkit-scrollbar-thumb:hover {
+  background: #707070;
 }
 

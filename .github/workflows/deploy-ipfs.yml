@@ -3,8 +3,6 @@ name: Deploy to IPFS
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   build-and-deploy:
@@ -17,16 +15,55 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+      - run: npm ci
 
-      - name: Build Gatsby site
-        run: npx gatsby build
+      - run: npm run build
         env:
-          NODE_ENV: production
+          TINA_CLIENT_ID: ${{ secrets.TINA_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
 
-      - name: Deploy to Fleek
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: npx @fleek-platform/cli sites deploy
+      - name: Upload to Storacha (IPFS + Filecoin)
+        id: upload
         env:
-          FLEEK_TOKEN: ${{ secrets.FLEEK_TOKEN }}
+          W3_PRINCIPAL: ${{ secrets.W3_PRINCIPAL }}
+          W3_PROOF: ${{ secrets.W3_PROOF }}
+        run: |
+          set -euo pipefail
+          npm install -g @storacha/cli
+          echo "$W3_PROOF" | base64 -d > /tmp/proof.ucan
+          storacha agent import /tmp/proof.ucan
+          rm /tmp/proof.ucan
+          storacha space ls
+          CID=$(storacha up out/ --json | jq -r '.root."/"')
+          [ -z "$CID" ] && echo "Failed to extract CID from upload" && exit 1
+          echo "cid=$CID" >> "$GITHUB_OUTPUT"
+          echo "Uploaded to IPFS. CID: $CID"
+
+      - name: Update IPNS record
+        if: steps.upload.outputs.cid != ''
+        env:
+          W3_PRINCIPAL: ${{ secrets.W3_PRINCIPAL }}
+          W3_PROOF: ${{ secrets.W3_PROOF }}
+        run: |
+          storacha name publish "${{ secrets.IPNS_NAME }}" "${{ steps.upload.outputs.cid }}"
+
+      - name: Update DNSLink
+        if: steps.upload.outputs.cid != ''
+        env:
+          DNS_API_TOKEN: ${{ secrets.DNS_API_TOKEN }}
+          DNS_ZONE_ID: ${{ secrets.DNS_ZONE_ID }}
+          DNS_RECORD_ID: ${{ secrets.DNS_RECORD_ID }}
+        run: |
+          curl -X PUT "https://api.cloudflare.com/client/v4/zones/$DNS_ZONE_ID/dns_records/$DNS_RECORD_ID" \
+            -H "Authorization: Bearer $DNS_API_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data "{\"type\":\"TXT\",\"name\":\"_dnslink\",\"content\":\"dnslink=/ipfs/${{ steps.upload.outputs.cid }}\"}"
+
+      - name: Deployment summary
+        if: steps.upload.outputs.cid != ''
+        run: |
+          echo "## Deployment Complete"
+          echo "CID: ${{ steps.upload.outputs.cid }}"
+          echo "IPFS: https://storacha.link/ipfs/${{ steps.upload.outputs.cid }}"
+          echo "Gateway: https://dweb.link/ipfs/${{ steps.upload.outputs.cid }}"
+          echo "Site: https://societyprotocol.io"

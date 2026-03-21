@@ -1,0 +1,58 @@
+fragment PostsParts on Posts {
+  __typename
+  title
+  slug
+  description
+  date
+  author
+  image
+  cardImage
+  body
+}
+
+fragment RolesParts on Roles {
+  __typename
+  title
+  slug
+  emoji
+  commitment
+  responsibilities
+  requirements
+}
+
+fragment WhitepaperParts on Whitepaper {
+  __typename
+  title
+  slug
+  description
+  body
+}
+
+fragment GlossaryParts on Glossary {
+  __typename
+  title
+  slug
+  description
+  body
+}
+
+fragment IdeologyParts on Ideology {
+  __typename
+  title
+  slug
+  description
+  body
+}
+
+fragment TeamParts on Team {
+  __typename
+  title
+  slug
+  role
+  jobTitle
+  image
+  order
+  xUrl
+  farcasterUrl
+  lensUrl
+}

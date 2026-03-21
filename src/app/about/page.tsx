@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
+import { getCoreTeam, getAdvisors } from "@/lib/mdx";
+import { SocialLinks } from "@/components/ui/SocialIcons";
 
 export const metadata: Metadata = { title: "About" };
 
 export default function About() {
+  const coreTeam = getCoreTeam();
+  const advisors = getAdvisors();
   return (
     <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url(/images/group-131-bg.png)" }}>
       {/* 1. Mission Statement Hero */}
@@ -19,17 +24,50 @@ export default function About() {
 
       {/* 2. Building a Movement */}
       <section className="max-w-[1400px] mx-auto px-8 pb-32">
-        <div className="overflow-hidden rounded-[30px] bg-[length:100%_100%] bg-center bg-no-repeat" style={{ backgroundImage: "url(/images/vector-l72.png)" }}>
-          <div className="grid md:grid-cols-2 gap-8 p-6 md:p-10">
-            <div className="relative rounded-[38px] overflow-hidden aspect-[648/416]">
-              <img
+        {/* Mobile/Tablet: about-movement as bg image */}
+        <div className="lg:hidden">
+          <div className="relative overflow-hidden aspect-[648/416] mb-6">
+            <Image
+              src="/images/about-movement.png"
+              alt="Building a movement"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="flex flex-col justify-center">
+            <h2 className="font-display text-2xl md:text-[32px] font-normal mb-6">
+              Building a movement
+            </h2>
+            <p className="font-body text-[20px] text-[#ADADAD] leading-[1.1]">
+              We are gathered because society is on the verge of a radical
+              transformation driven by sheer technological innovation from
+              Nation States to Synchronized States. We believe that
+              Synchronized States are the evolution to Nation States because of
+              clearly discernible advantages and offer the promise of a better
+              world for humanity.
+            </p>
+            <p className="font-body text-[20px] text-[#ADADAD] leading-[1.1] mt-6">
+              We are gathered as a distributed and decentralized movement to
+              fulfill the promise of accomplishing this transition while
+              remaining true to its ideological foundations.
+            </p>
+          </div>
+        </div>
+        {/* Desktop: original two-column layout with vector bg */}
+        <div className="hidden lg:block overflow-hidden bg-[length:100%_100%] bg-center bg-no-repeat" style={{ backgroundImage: "url(/images/vector-l72.png)" }}>
+          <div className="grid grid-cols-2 gap-8 p-10">
+            <div className="relative overflow-hidden aspect-[648/416]">
+              <Image
                 src="/images/about-movement.png"
                 alt="Building a movement"
-                className="absolute inset-0 w-full h-full object-cover"
+                fill
+                sizes="50vw"
+                className="object-cover"
               />
             </div>
             <div className="flex flex-col justify-center">
-              <h2 className="font-display text-2xl md:text-[32px] font-normal mb-6">
+              <h2 className="font-display text-[32px] font-normal mb-6">
                 Building a movement
               </h2>
               <p className="font-body text-[20px] text-[#ADADAD] leading-[1.1]">
@@ -78,18 +116,7 @@ export default function About() {
             </svg>
           </Link>
         </div>
-        <p className="font-heading text-[21px] text-[#ADADAD] leading-[1.1] max-w-3xl mb-10">
-          Values are the operating system that society functions on. Explore the
-          core values that Society Protocol is built around.
-        </p>
-        <div className="relative rounded-[20px] overflow-hidden w-full aspect-[1160/407] mb-8">
-          <img
-            src="/images/about-core-values.png"
-            alt="Society Protocol core values"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        </div>
-        <div className="flex justify-end md:hidden">
+        <div className="flex md:hidden mb-6">
           <Link
             href="/learn"
             className="inline-flex items-center gap-2 font-mono text-[18px] bg-white text-black rounded-[38px] px-8 py-3 hover:bg-white/90 transition-colors"
@@ -112,6 +139,19 @@ export default function About() {
             </svg>
           </Link>
         </div>
+        <p className="font-heading text-[21px] text-[#ADADAD] leading-[1.1] max-w-3xl mb-10">
+          Values are the operating system that society functions on. Explore the
+          core values that Society Protocol is built around.
+        </p>
+        <div className="relative rounded-[20px] overflow-hidden w-full aspect-[1160/407] mb-8">
+          <Image
+            src="/images/about-core-values.png"
+            alt="Society Protocol core values"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
       </section>
 
       {/* 4. Core Team */}
@@ -123,29 +163,22 @@ export default function About() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
           {coreTeam.map((member, i) => (
             <div key={i} className="flex flex-col items-center text-center">
-              <div className="w-[140px] h-[140px] md:w-[165px] md:h-[165px] rounded-full mb-6 relative">
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{ border: `1.2px solid ${member.borderColor}` }}
-                />
-                <img
+              <div className="w-[140px] h-[140px] md:w-[165px] md:h-[165px] rounded-full mb-6 flex items-center justify-center" style={{ border: "1.2px solid #C3C3C3" }}>
+                <Image
                   src={member.image}
-                  alt={member.name}
-                  className="absolute inset-[11px] rounded-full object-cover"
+                  alt={member.title}
+                  width={143}
+                  height={143}
+                  className="w-[118px] h-[118px] md:w-[143px] md:h-[143px] rounded-full object-cover"
                 />
               </div>
-              <p
-                className="font-heading text-lg md:text-[21px] mb-1"
-                style={{ color: member.nameColor }}
-              >
-                {member.name}
-              </p>
-              <p
-                className="font-heading text-lg md:text-[21px]"
-                style={{ color: member.titleColor }}
-              >
+              <p className="font-heading text-lg md:text-[21px] mb-1 text-[#ADADAD]">
                 {member.title}
               </p>
+              <p className="font-heading text-lg md:text-[21px] text-[#7A7A7A]">
+                {member.jobTitle}
+              </p>
+              <SocialLinks socials={{ x: member.xUrl, farcaster: member.farcasterUrl, lens: member.lensUrl }} />
             </div>
           ))}
         </div>
@@ -159,121 +192,43 @@ export default function About() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10">
           {advisors.map((advisor, i) => (
             <div key={i} className="flex flex-col items-center text-center">
-              <div className="w-[110px] h-[110px] md:w-[136px] md:h-[136px] rounded-full mb-5 relative">
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{ border: `1px solid ${advisor.borderColor}` }}
-                />
-                <img
+              <div className="w-[110px] h-[110px] md:w-[136px] md:h-[136px] rounded-full mb-5 flex items-center justify-center" style={{ border: "1px solid #C3C3C3" }}>
+                <Image
                   src={advisor.image}
-                  alt={advisor.name}
-                  className="absolute inset-[9px] rounded-full object-cover"
+                  alt={advisor.title}
+                  width={118}
+                  height={118}
+                  className="w-[92px] h-[92px] md:w-[118px] md:h-[118px] rounded-full object-cover"
                 />
               </div>
-              <p
-                className="font-heading text-sm md:text-[17px] mb-1"
-                style={{ color: advisor.nameColor }}
-              >
-                {advisor.name}
-              </p>
-              <p
-                className="font-heading text-sm md:text-[17px]"
-                style={{ color: advisor.titleColor }}
-              >
+              <p className="font-heading text-sm md:text-[17px] mb-1 text-[#ADADAD]">
                 {advisor.title}
               </p>
+              <p className="font-heading text-sm md:text-[17px] text-[#7A7A7A]">
+                {advisor.jobTitle}
+              </p>
+              <SocialLinks socials={{ x: advisor.xUrl, farcaster: advisor.farcasterUrl, lens: advisor.lensUrl }} />
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* 6. Community Partners */}
+      <section className="max-w-[1400px] mx-auto px-8 pb-32">
+        <h2 className="font-display text-3xl md:text-[42px] font-normal mb-12">
+          Community Partners
+        </h2>
+        <div className="flex flex-wrap items-center gap-10">
+          <Image
+            src="/images/linux-foundation.png"
+            alt="Linux Foundation"
+            width={243}
+            height={95}
+            className="object-contain"
+          />
         </div>
       </section>
     </div>
   );
 }
 
-/* Static data */
-
-const coreTeam = [
-  {
-    name: "Person Name",
-    title: "Co-Founder & CEO",
-    image: "/images/team-placeholder.png",
-    borderColor: "#C3C3C3",
-    nameColor: "#ADADAD",
-    titleColor: "#7A7A7A",
-  },
-  {
-    name: "Person Name",
-    title: "Co-Founder & CTO",
-    image: "/images/team-placeholder.png",
-    borderColor: "#C3C3C3",
-    nameColor: "#ADADAD",
-    titleColor: "#7A7A7A",
-  },
-  {
-    name: "Person Name",
-    title: "Head of Research",
-    image: "/images/team-placeholder.png",
-    borderColor: "#95A47B",
-    nameColor: "#95A47B",
-    titleColor: "#5B634C",
-  },
-  {
-    name: "Person Name",
-    title: "Lead Engineer",
-    image: "/images/team-placeholder.png",
-    borderColor: "#C3C3C3",
-    nameColor: "#ADADAD",
-    titleColor: "#7A7A7A",
-  },
-];
-
-const advisors = [
-  {
-    name: "Person Name",
-    title: "Advisor",
-    image: "/images/team-placeholder.png",
-    borderColor: "#C3C3C3",
-    nameColor: "#ADADAD",
-    titleColor: "#7A7A7A",
-  },
-  {
-    name: "Person Name",
-    title: "Advisor",
-    image: "/images/team-placeholder.png",
-    borderColor: "#C3C3C3",
-    nameColor: "#ADADAD",
-    titleColor: "#7A7A7A",
-  },
-  {
-    name: "Person Name",
-    title: "Advisor",
-    image: "/images/team-placeholder.png",
-    borderColor: "#C3C3C3",
-    nameColor: "#ADADAD",
-    titleColor: "#7A7A7A",
-  },
-  {
-    name: "Person Name",
-    title: "Advisor",
-    image: "/images/team-placeholder.png",
-    borderColor: "#95A47B",
-    nameColor: "#95A47B",
-    titleColor: "#5B634C",
-  },
-  {
-    name: "Person Name",
-    title: "Advisor",
-    image: "/images/team-placeholder.png",
-    borderColor: "#C3C3C3",
-    nameColor: "#ADADAD",
-    titleColor: "#7A7A7A",
-  },
-  {
-    name: "Person Name",
-    title: "Advisor",
-    image: "/images/team-placeholder.png",
-    borderColor: "#C3C3C3",
-    nameColor: "#ADADAD",
-    titleColor: "#7A7A7A",
-  },
-];
