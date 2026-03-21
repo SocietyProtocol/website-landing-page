@@ -19,14 +19,13 @@ jobs:
 
       - run: npm run build
         env:
-          TINA_CLIENT_ID: ${{ secrets.TINA_CLIENT_ID }}
-          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+          TINA_CLIENT_ID: ${{ secrets.TINACLIENTID }}
+          TINA_TOKEN: ${{ secrets.TINATOKEN }}
 
       - name: Upload to Storacha (IPFS + Filecoin)
         id: upload
         env:
-          W3_PRINCIPAL: ${{ secrets.W3_PRINCIPAL }}
-          W3_PROOF: ${{ secrets.W3_PROOF }}
+          W3_PROOF: ${{ secrets.W3PROOF }}
         run: |
           set -euo pipefail
           npm install -g @storacha/cli
@@ -39,25 +38,17 @@ jobs:
           echo "cid=$CID" >> "$GITHUB_OUTPUT"
           echo "Uploaded to IPFS. CID: $CID"
 
-      - name: Update IPNS record
-        if: steps.upload.outputs.cid != ''
-        env:
-          W3_PRINCIPAL: ${{ secrets.W3_PRINCIPAL }}
-          W3_PROOF: ${{ secrets.W3_PROOF }}
-        run: |
-          storacha name publish "${{ secrets.IPNS_NAME }}" "${{ steps.upload.outputs.cid }}"
-
       - name: Update DNSLink
         if: steps.upload.outputs.cid != ''
         env:
-          DNS_API_TOKEN: ${{ secrets.DNS_API_TOKEN }}
-          DNS_ZONE_ID: ${{ secrets.DNS_ZONE_ID }}
-          DNS_RECORD_ID: ${{ secrets.DNS_RECORD_ID }}
+          DNS_API_TOKEN: ${{ secrets.DNSAPITOKEN }}
+          DNS_ZONE_ID: ${{ secrets.DNSZONEID }}
+          DNS_RECORD_ID: ${{ secrets.DNSRECORDID }}
         run: |
           curl -X PUT "https://api.cloudflare.com/client/v4/zones/$DNS_ZONE_ID/dns_records/$DNS_RECORD_ID" \
             -H "Authorization: Bearer $DNS_API_TOKEN" \
             -H "Content-Type: application/json" \
-            --data "{\"type\":\"TXT\",\"name\":\"_dnslink\",\"content\":\"dnslink=/ipfs/${{ steps.upload.outputs.cid }}\"}"
+            --data "{\"type\":\"TXT\",\"name\":\"_dnslink.new\",\"content\":\"dnslink=/ipfs/${{ steps.upload.outputs.cid }}\"}"
 
       - name: Deployment summary
         if: steps.upload.outputs.cid != ''
@@ -66,4 +57,4 @@ jobs:
           echo "CID: ${{ steps.upload.outputs.cid }}"
           echo "IPFS: https://storacha.link/ipfs/${{ steps.upload.outputs.cid }}"
           echo "Gateway: https://dweb.link/ipfs/${{ steps.upload.outputs.cid }}"
-          echo "Site: https://societyprotocol.io"
+          echo "Site: https://new.societyprotocol.io"
