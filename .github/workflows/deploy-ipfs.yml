@@ -32,7 +32,8 @@ jobs:
           echo "$W3_PROOF" | base64 -d > /tmp/proof.ucan
           storacha proof add /tmp/proof.ucan
           rm /tmp/proof.ucan
-          storacha space ls
+          SPACE_DID=$(storacha space ls | head -1 | awk '{print $1}')
+          storacha space use "$SPACE_DID"
           CID=$(storacha up out/ --json | jq -r '.root."/"')
           [ -z "$CID" ] && echo "Failed to extract CID from upload" && exit 1
           echo "cid=$CID" >> "$GITHUB_OUTPUT"
