@@ -30,7 +30,7 @@ jobs:
           set -euo pipefail
           npm install -g @storacha/cli
           echo "$W3_PROOF" | base64 -d > /tmp/proof.ucan
-          storacha agent import /tmp/proof.ucan
+          storacha proof add /tmp/proof.ucan
           rm /tmp/proof.ucan
           storacha space ls
           CID=$(storacha up out/ --json | jq -r '.root."/"')
