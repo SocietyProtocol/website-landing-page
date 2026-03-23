@@ -23,11 +23,13 @@ jobs:
           TINA_TOKEN: ${{ secrets.TINATOKEN }}
 
       - name: Clear storacha CLI cache
-        run: rm -rf ~/.config/storacha
+        run: rm -rf ~/.config/storacha-cli
 
       - name: Upload to Storacha (IPFS + Filecoin)
         uses: storacha/add-to-web3@v4
         id: upload
+        env:
+          STORACHA_STORE_NAME: storacha-deploy-${{ github.run_id }}
         with:
           path_to_add: 'out'
           secret_key: ${{ secrets.STORACHAPRINCIPAL }}
