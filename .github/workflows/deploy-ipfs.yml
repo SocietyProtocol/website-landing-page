@@ -23,21 +23,12 @@ jobs:
           TINA_TOKEN: ${{ secrets.TINATOKEN }}
 
       - name: Upload to Storacha (IPFS + Filecoin)
+        uses: storacha/add-to-web3@v4
         id: upload
-        env:
-          W3_PROOF: ${{ secrets.W3PROOF }}
-        run: |
-          set -euo pipefail
-          npm install -g @storacha/cli
-          echo "$W3_PROOF" | base64 -d > /tmp/proof.ucan
-          storacha proof add /tmp/proof.ucan
-          rm /tmp/proof.ucan
-          SPACE_DID=$(storacha space ls | head -1 | awk '{print $1}')
-          storacha space use "$SPACE_DID"
-          CID=$(storacha up out/ --json | jq -r '.root."/"')
-          [ -z "$CID" ] && echo "Failed to extract CID from upload" && exit 1
-          echo "cid=$CID" >> "$GITHUB_OUTPUT"
-          echo "Uploaded to IPFS. CID: $CID"
+        with:
+          path_to_add: 'out'
+          secret_key: ${{ secrets.STORACHAPRINCIPAL }}
+          proof: ${{ secrets.W3PROOF }}
 
       - name: Update DNSLink
         if: steps.upload.outputs.cid != ''
