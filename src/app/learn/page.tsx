@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Button from "@/components/ui/Button";
+import VideoPlayer from "@/components/ui/VideoPlayer";
+import mediaCids from "@/data/media-cids.json";
 // TODO: Uncomment when side videos are done
 // import ScrollContainer from "@/components/ui/ScrollContainer";
 import ArticleGrid from "@/components/ui/ArticleGrid";
@@ -32,48 +33,12 @@ export default function Learn() {
         <div className="grid gap-8">
           {/* Featured Video Card */}
           <div className="relative rounded-[38px] overflow-hidden border border-[#656464] aspect-[897/484]">
-            <Image
-              src="/images/video-thumbnail.png"
-              alt="How Society Protocol Works"
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
+            <VideoPlayer
+              src={mediaCids["narrative-video-sp.mp4"]}
+              poster="/images/video-thumbnail.png"
+              title="How Society Protocol Works"
+              label="GAME THEORY 101"
             />
-            <div
-              className="absolute inset-0"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(0,0,0,0.45) 0%, rgba(17,17,17,0.85) 100%)",
-              }}
-            />
-            <div className="absolute bottom-8 left-8 right-8 flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <div className="w-[50px] h-[50px] rounded-full bg-white flex items-center justify-center shrink-0 cursor-pointer pl-[3px]">
-                  <svg
-                    width="19"
-                    height="23"
-                    viewBox="0 0 19 23"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M17.5 9.77a1.5 1.5 0 0 1 0 2.46L3.25 21.6a1.5 1.5 0 0 1-2.25-1.23V2.63A1.5 1.5 0 0 1 3.25.4L17.5 9.77Z"
-                      fill="black"
-                      stroke="black"
-                      strokeWidth="1.15"
-                      rx="2.3"
-                    />
-                  </svg>
-                </div>
-                <span className="font-body text-[24px] text-white">
-                  Game Theory
-                </span>
-              </div>
-              <h3 className="font-display text-[34px] font-normal leading-none text-white">
-                How Society Protocol Works
-              </h3>
-            </div>
           </div>
 
           {/* TODO: Uncomment when side videos are done
