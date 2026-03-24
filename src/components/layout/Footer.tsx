@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { footerColumns } from "@/data/navigation";
 
 export default function Footer() {
@@ -56,10 +57,19 @@ export default function Footer() {
         {/* Separator line */}
         <div className="border-t border-white mb-10" />
 
-        {/* Large SOCIETY PROTOCOL text */}
-        <h2 className="font-display text-[60px] md:text-[105px] leading-[100px] tracking-[0.002em] text-white mb-10">
-          SOCIETY PROTOCOL
-        </h2>
+        {/* Large SOCIETY PROTOCOL text + logo */}
+        <div className="flex flex-col items-center md:flex-row md:justify-between mb-10">
+          <Image
+            src="/Vector G148.png"
+            alt="Society Protocol Logo"
+            width={100}
+            height={100}
+            className="h-[60px] md:h-[100px] w-auto brightness-0 invert md:order-2"
+          />
+          <h2 className="font-display text-[60px] md:text-[105px] leading-[100px] tracking-[-0.02em] text-white text-center md:text-left md:order-1">
+            SOCIETY PROTOCOL
+          </h2>
+        </div>
 
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -75,63 +85,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Globe vector SVG (bottom-right) */}
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] opacity-10 pointer-events-none">
-        <svg
-          viewBox="0 0 400 400"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full h-full"
-        >
-          <circle
-            cx="200"
-            cy="200"
-            r="180"
-            stroke="white"
-            strokeWidth="0.5"
-          />
-          <ellipse
-            cx="200"
-            cy="200"
-            rx="120"
-            ry="180"
-            stroke="white"
-            strokeWidth="0.5"
-          />
-          <ellipse
-            cx="200"
-            cy="200"
-            rx="50"
-            ry="180"
-            stroke="white"
-            strokeWidth="0.5"
-          />
-          <line
-            x1="20"
-            y1="140"
-            x2="380"
-            y2="140"
-            stroke="white"
-            strokeWidth="0.5"
-          />
-          <line
-            x1="20"
-            y1="200"
-            x2="380"
-            y2="200"
-            stroke="white"
-            strokeWidth="0.5"
-          />
-          <line
-            x1="20"
-            y1="260"
-            x2="380"
-            y2="260"
-            stroke="white"
-            strokeWidth="0.5"
-          />
-        </svg>
-      </div>
     </footer>
   );
 }
