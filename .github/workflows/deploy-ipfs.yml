@@ -40,12 +40,12 @@ jobs:
         env:
           DNS_API_TOKEN: ${{ secrets.DNSAPITOKEN }}
           DNS_ZONE_ID: ${{ secrets.DNSZONEID }}
-          DNS_RECORD_ID: ${{ secrets.DNSRECORDID }}
+          WEB3_HOSTNAME_ID: ${{ secrets.WEBHOSTNAMEID }}
         run: |
-          curl -X PUT "https://api.cloudflare.com/client/v4/zones/$DNS_ZONE_ID/dns_records/$DNS_RECORD_ID" \
+          curl -X PATCH "https://api.cloudflare.com/client/v4/zones/$DNS_ZONE_ID/web3/hostnames/$WEB3_HOSTNAME_ID" \
             -H "Authorization: Bearer $DNS_API_TOKEN" \
             -H "Content-Type: application/json" \
-            --data "{\"type\":\"TXT\",\"name\":\"_dnslink.new\",\"content\":\"dnslink=/ipfs/${{ steps.upload.outputs.cid }}\"}"
+            --data "{\"dnslink\":\"/ipfs/${{ steps.upload.outputs.cid }}\"}"
 
       - name: Deployment summary
         if: steps.upload.outputs.cid != ''
