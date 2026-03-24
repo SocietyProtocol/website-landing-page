@@ -3,8 +3,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { footerColumns } from "@/data/navigation";
+import { useMailchimpSubscribe } from "@/hooks/useMailchimpSubscribe";
 
 export default function Footer() {
+  const { email, setEmail, status, message, handleSubscribe, resetStatus } =
+    useMailchimpSubscribe();
+
   return (
     <footer className="relative bg-bg-footer text-text-primary overflow-hidden">
       <div className="max-w-[1400px] mx-auto px-8 pt-20 pb-10">
@@ -35,21 +39,31 @@ export default function Footer() {
             <h4 className="font-display text-[25px] text-text-muted mb-8">
               STAY UPDATED
             </h4>
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form onSubmit={handleSubscribe}>
               <div className="flex items-center border-b border-white pb-2">
                 <input
                   type="email"
                   placeholder="EMAIL ADDRESS"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); resetStatus(); }}
                   className="bg-transparent font-display text-[16px] lg:text-[25px] text-text-muted placeholder:text-text-muted flex-1 min-w-0 outline-none"
+                  required
                 />
                 <span className="text-[#CFCFCF] mx-2 font-display text-[16px] lg:text-[25px]">|</span>
                 <button
                   type="submit"
+                  disabled={status === "loading"}
                   className="font-display text-[16px] lg:text-[25px] text-[#CFCFCF] hover:text-white transition-colors shrink-0"
                 >
                   SUBMIT
                 </button>
               </div>
+              {status === "success" && (
+                <p className="font-display text-[14px] text-green-400 mt-2">{message}</p>
+              )}
+              {status === "error" && (
+                <p className="font-display text-[14px] text-red-400 mt-2">{message}</p>
+              )}
             </form>
           </div>
         </div>

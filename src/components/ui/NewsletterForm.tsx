@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMailchimpSubscribe } from "@/hooks/useMailchimpSubscribe";
 
 interface NewsletterFormProps {
   className?: string;
@@ -11,13 +11,8 @@ export default function NewsletterForm({
   className = "",
   variant = "pill",
 }: NewsletterFormProps) {
-  const [email, setEmail] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // TODO: wire up newsletter signup
-    setEmail("");
-  };
+  const { email, setEmail, status, message, handleSubscribe, resetStatus } =
+    useMailchimpSubscribe();
 
   const isCompact = variant === "compact";
 
@@ -31,25 +26,34 @@ export default function NewsletterForm({
   const textSize = isCompact ? "text-[16px]" : "text-[25px]";
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`${wrapperStyles} ${className}`}
-    >
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="EMAIL ADDRESS"
-        className={`bg-transparent font-display ${textSize} text-white placeholder:text-white flex-1 min-w-0 outline-none`}
-        required
-      />
-      <span className={`text-white mx-${isCompact ? "2" : "3"} font-display ${textSize}`}>|</span>
-      <button
-        type="submit"
-        className={`font-display ${textSize} text-white hover:text-accent-cyan transition-colors shrink-0`}
+    <div>
+      <form
+        onSubmit={handleSubscribe}
+        className={`${wrapperStyles} ${className}`}
       >
-        SUBMIT
-      </button>
-    </form>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => { setEmail(e.target.value); resetStatus(); }}
+          placeholder="EMAIL ADDRESS"
+          className={`bg-transparent font-display ${textSize} text-white placeholder:text-white flex-1 min-w-0 outline-none`}
+          required
+        />
+        <span className={`text-white mx-${isCompact ? "2" : "3"} font-display ${textSize}`}>|</span>
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          className={`font-display ${textSize} text-white hover:text-accent-cyan transition-colors shrink-0`}
+        >
+          SUBMIT
+        </button>
+      </form>
+      {status === "success" && (
+        <p className="font-display text-[14px] text-green-400 mt-2">{message}</p>
+      )}
+      {status === "error" && (
+        <p className="font-display text-[14px] text-red-400 mt-2">{message}</p>
+      )}
+    </div>
   );
 }
