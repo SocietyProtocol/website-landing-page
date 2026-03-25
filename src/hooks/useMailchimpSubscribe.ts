@@ -37,6 +37,7 @@ export function useMailchimpSubscribe() {
         setStatus("success");
         setMessage("Thanks for subscribing!");
         setEmail("");
+        setTimeout(() => setStatus("idle"), 5000);
       } else {
         setStatus("error");
         setMessage(data.msg.replace(/<[^>]*>/g, "") || "Something went wrong.");
