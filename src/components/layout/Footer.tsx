@@ -74,7 +74,7 @@ export default function Footer() {
         {/* Large SOCIETY PROTOCOL text + logo */}
         <div className="flex flex-col items-center md:flex-row md:justify-between mb-10">
           <Image
-            src="/Vector G148.png"
+            src="/vector-g148.png"
             alt="Society Protocol Logo"
             width={100}
             height={100}

@@ -22,7 +22,7 @@ export default function Navbar() {
           className="flex items-center gap-2 font-display text-[21.283px] tracking-[0.002em] text-white bg-[#131313] border border-[#656565] rounded-[111px] pr-4 pl-1 h-[42px]"
         >
           <Image
-            src="/Vector Home Page.png"
+            src="/vector-home-page.png"
             alt="Society Protocol Logo"
             width={31}
             height={33}
