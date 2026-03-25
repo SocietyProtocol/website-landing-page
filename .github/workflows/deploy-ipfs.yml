@@ -35,17 +35,12 @@ jobs:
           secret_key: ${{ secrets.STORACHAPRINCIPAL }}
           proof: ${{ secrets.W3PROOF }}
 
-      - name: Update DNSLink
-        if: steps.upload.outputs.cid != ''
-        env:
-          DNS_API_TOKEN: ${{ secrets.DNSAPITOKEN }}
-          DNS_ZONE_ID: ${{ secrets.DNSZONEID }}
-          WEB3_HOSTNAME_ID: ${{ secrets.WEBHOSTNAMEID }}
-        run: |
-          curl -X PATCH "https://api.cloudflare.com/client/v4/zones/$DNS_ZONE_ID/web3/hostnames/$WEB3_HOSTNAME_ID" \
-            -H "Authorization: Bearer $DNS_API_TOKEN" \
-            -H "Content-Type: application/json" \
-            --data "{\"dnslink\":\"/ipfs/${{ steps.upload.outputs.cid }}\"}"
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.DNSAPITOKEN }}
+          accountId: ${{ secrets.CLOUDFLAREACCOUNTID }}
+          command: pages deploy out/ --project-name=society-protocol
 
       - name: Deployment summary
         if: steps.upload.outputs.cid != ''
@@ -53,5 +48,4 @@ jobs:
           echo "## Deployment Complete"
           echo "CID: ${{ steps.upload.outputs.cid }}"
           echo "IPFS: https://storacha.link/ipfs/${{ steps.upload.outputs.cid }}"
-          echo "Gateway: https://dweb.link/ipfs/${{ steps.upload.outputs.cid }}"
           echo "Site: https://new.societyprotocol.io"

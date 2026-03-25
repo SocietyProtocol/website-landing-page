@@ -58,14 +58,29 @@ export default function FloatingIndex({ headings }: { headings: Heading[] }) {
           </div>
         </>
       ) : (
-        <div
-          onClick={() => setOpen(true)}
-          className="bg-[#10141A] border border-[#505050] rounded-[40px] px-6 pt-6 pb-6 cursor-pointer w-fit"
-        >
-          <h4 className="font-heading text-[22px] text-[#FDFDFD] text-right tracking-widest mr-4 ml-4">
-            INDEX
-          </h4>
-        </div>
+        <>
+          {/* Collapsed header */}
+          <div
+            className="overflow-hidden px-6 pt-6 pb-12 cursor-pointer w-full"
+            onClick={() => setOpen(true)}
+            style={{
+              backgroundImage: "url(/images/index-sidebar-bg.png)",
+              backgroundSize: "271px 413px",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <h4 className="font-heading text-[22px] text-[#FDFDFD] text-right tracking-widest mr-4">
+              INDEX
+            </h4>
+          </div>
+          {/* Collapsed footer */}
+          <div onClick={() => setOpen(true)} className="bg-[#10141A] border border-[#505050] border-t-0 rounded-b-[40px] px-6 pb-4 flex items-center justify-center gap-1 cursor-pointer w-full">
+            <span className="font-heading text-[15px] text-[#dadada]">Click to expand</span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2 4.5L6 8.5L10 4.5" stroke="#dadada" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+        </>
       )}
     </div>
   );
