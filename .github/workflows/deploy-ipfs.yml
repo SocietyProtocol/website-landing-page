@@ -36,11 +36,12 @@ jobs:
           proof: ${{ secrets.W3PROOF }}
 
       - name: Create Cloudflare Pages project
+        continue-on-error: true
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.DNSAPITOKEN }}
           accountId: ${{ secrets.CLOUDFLAREACCOUNTID }}
-          command: pages project create society-protocol --production-branch=main || true
+          command: pages project create society-protocol --production-branch=main
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
