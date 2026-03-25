@@ -35,6 +35,13 @@ jobs:
           secret_key: ${{ secrets.STORACHAPRINCIPAL }}
           proof: ${{ secrets.W3PROOF }}
 
+      - name: Create Cloudflare Pages project
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.DNSAPITOKEN }}
+          accountId: ${{ secrets.CLOUDFLAREACCOUNTID }}
+          command: pages project create society-protocol --production-branch=main || true
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
