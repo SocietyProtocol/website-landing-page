@@ -7,7 +7,7 @@ index e237e9f..7ef9a17 100644
         * but node does. This was a surprise, but using `new Object()` seems to do the trick.
         */
 -      "process.env": `new Object(${JSON.stringify(publicEnv)})`,
-+      "process.env": `(${JSON.stringify(publicEnv)})`,
++      ...Object.fromEntries(Object.entries(publicEnv).map(([k, v]) => [`process.env.${k}`, v])),
        // Used by picomatch https://github.com/micromatch/picomatch/blob/master/lib/utils.js#L4
        "process.platform": `"${process.platform}"`,
        __API_URL__: `"${apiURL}"`,
