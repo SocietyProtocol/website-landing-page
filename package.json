@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "tinacms build && next build",
     "lint": "eslint",
-    "tinacms": "tinacms dev -c \"next dev\""
+    "tinacms": "tinacms dev -c \"next dev\"",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
@@ -35,6 +36,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "^15",
+    "patch-package": "^8.0.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
