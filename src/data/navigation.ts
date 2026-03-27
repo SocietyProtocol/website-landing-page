@@ -2,6 +2,7 @@ export const navLinks = [
   { label: "LEARN", href: "/learn" },
   { label: "ABOUT", href: "/about" },
   { label: "JOIN", href: "/join" },
+  { label: "ARTICLES", href: "/articles" },
 ] as const;
 
 export const footerColumns = [
@@ -11,7 +12,7 @@ export const footerColumns = [
       { label: "APP", href: "https://staging-society-protocol-client.vercel.app" },
       { label: "LEARN", href: "/learn" },
       { label: "ABOUT", href: "/about" },
-      { label: "COMMUNITY", href: "https://discord.com/invite/fpk7eH7aWQ" },
+      { label: "COMMUNITY", href: "/join" },
       { label: "ARTICLES", href: "/articles" },
     ],
   },
@@ -19,10 +20,9 @@ export const footerColumns = [
     title: "REFERENCE",
     links: [
       { label: "GLOSSARY", href: "/glossary" },
-      { label: "WHITEPAPER", href: "/whitepaper" },
       { label: "IDEOLOGY", href: "/ideology" },
-      // { label: "ROADMAP", href: "#" }, // page doesn't exist yet
       { label: "HANDBOOK", href: "/Published/Handbook" },
+      { label: "ROADMAP", href: "/roadmap" },
       { label: "CAREERS", href: "/roles" },
     ],
   },

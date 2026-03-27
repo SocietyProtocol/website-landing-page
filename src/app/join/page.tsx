@@ -37,7 +37,7 @@ export default function Join() {
               className="object-fill z-20"
               aria-hidden="true"
             />
-            <div className="relative z-10 flex flex-col justify-between h-full px-8 py-10">
+            <div className="relative z-40 flex flex-col justify-between h-full px-8 py-10">
               <h3 className="font-display text-[38px] font-normal leading-[1] text-white max-w-[648px]">
                 Stay Updated
                 <br /> on Project
@@ -70,7 +70,7 @@ export default function Join() {
               className="object-fill z-30"
               aria-hidden="true"
             />
-            <div className="relative z-10 flex flex-col justify-between h-full px-10 py-10">
+            <div className="relative z-40 flex flex-col justify-between h-full px-10 py-10">
               <h3 className="font-display text-[52px] font-normal leading-[1] text-white max-w-[648px]">
                 Stay Updated
                 <br className="lg:hidden" /> on Project

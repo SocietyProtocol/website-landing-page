@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { getCoreTeam, getAdvisors } from "@/lib/mdx";
-import { SocialLinks } from "@/components/ui/SocialIcons";
+// import { getCoreTeam, getAdvisors } from "@/lib/mdx";
+// import { SocialLinks } from "@/components/ui/SocialIcons";
 
 export const metadata: Metadata = { title: "About" };
 
 export default function About() {
-  const coreTeam = getCoreTeam();
-  const advisors = getAdvisors();
+  // const coreTeam = getCoreTeam();
+  // const advisors = getAdvisors();
   return (
     <div className="min-h-screen bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url(/images/group-131-bg.png)" }}>
       {/* 1. Mission Statement Hero */}
@@ -154,7 +154,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* 4. Core Team */}
+      {/* 4. Core Team - hidden until ready
       <section className="max-w-[1400px] mx-auto px-8 pb-32">
         <div className="border-t border-[#4F4F4F] mb-16" />
         <h2 className="font-heading text-4xl md:text-[51px] font-normal mb-16">
@@ -183,8 +183,9 @@ export default function About() {
           ))}
         </div>
       </section>
+      */}
 
-      {/* 5. Advisors */}
+      {/* 5. Advisors - hidden until ready
       <section className="max-w-[1400px] mx-auto px-8 pb-32">
         <h2 className="font-heading text-3xl md:text-[42px] font-normal mb-16">
           Advisors
@@ -212,8 +213,9 @@ export default function About() {
           ))}
         </div>
       </section>
+      */}
 
-      {/* 6. Community Partners */}
+      {/* 6. Community Partners - hidden until ready
       <section className="max-w-[1400px] mx-auto px-8 pb-32">
         <h2 className="font-display text-3xl md:text-[42px] font-normal mb-12">
           Community Partners
@@ -228,6 +230,7 @@ export default function About() {
           />
         </div>
       </section>
+      */}
     </div>
   );
 }

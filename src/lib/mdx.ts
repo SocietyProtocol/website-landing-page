@@ -7,6 +7,7 @@ const rolesDirectory = path.join(process.cwd(), "content/roles");
 const whitepaperDirectory = path.join(process.cwd(), "content/whitepaper");
 const glossaryDirectory = path.join(process.cwd(), "content/glossary");
 const ideologyDirectory = path.join(process.cwd(), "content/ideology");
+const roadmapDirectory = path.join(process.cwd(), "content/roadmap");
 const handbookDirectory = path.join(process.cwd(), "content/handbook");
 const teamDirectory = path.join(process.cwd(), "content/team");
 
@@ -22,6 +23,9 @@ export interface PostFrontmatter {
   author: string;
   image: string;
   cardImage?: string;
+  isIntro?: boolean;
+  order?: number;
+  videoUrl?: string;
 }
 
 export interface RoleFrontmatter {
@@ -39,6 +43,19 @@ function readMdxFiles(directory: string): string[] {
   } catch {
     return [];
   }
+}
+
+function normalizeImagePath(p: string | undefined): string | undefined {
+  if (!p) return undefined;
+  return p.startsWith("/") ? p : `/${p}`;
+}
+
+function normalizePost(post: PostFrontmatter): PostFrontmatter {
+  return {
+    ...post,
+    image: normalizeImagePath(post.image) ?? post.image,
+    cardImage: normalizeImagePath(post.cardImage),
+  };
 }
 
 function getAllFrontmatter<T>(directory: string): T[] {
@@ -62,19 +79,40 @@ export function getPostBySlug(slug: string): {
     const raw = fs.readFileSync(path.join(postsDirectory, file), "utf-8");
     const { data, content } = matter(raw);
     if (data.slug === slug) {
-      return { frontmatter: data as PostFrontmatter, content };
+      return { frontmatter: normalizePost(data as PostFrontmatter), content };
     }
   }
   throw new Error(`Post not found: ${slug}`);
 }
 
 export function getAllPosts(): PostFrontmatter[] {
-  return getAllFrontmatter<PostFrontmatter>(postsDirectory).sort((a, b) => {
+  return getAllFrontmatter<PostFrontmatter>(postsDirectory).map(normalizePost).sort((a, b) => {
     if (!a.date && !b.date) return 0;
     if (!a.date) return 1;
     if (!b.date) return -1;
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
+}
+
+export function getAllPostsByOrder(): PostFrontmatter[] {
+  return getAllFrontmatter<PostFrontmatter>(postsDirectory).map(normalizePost).sort((a, b) => {
+    if (a.order == null && b.order == null) return 0;
+    if (a.order == null) return 1;
+    if (b.order == null) return -1;
+    return a.order - b.order;
+  });
+}
+
+export function getIntroPosts(): PostFrontmatter[] {
+  return getAllFrontmatter<PostFrontmatter>(postsDirectory)
+    .map(normalizePost)
+    .filter((p) => p.isIntro)
+    .sort((a, b) => {
+      if (a.order == null && b.order == null) return 0;
+      if (a.order == null) return 1;
+      if (b.order == null) return -1;
+      return a.order - b.order;
+    });
 }
 
 export function getAllRoles(): RoleFrontmatter[] {
@@ -95,6 +133,22 @@ export function getWhitepaper(): { frontmatter: WhitepaperFrontmatter; content: 
   const raw = fs.readFileSync(path.join(whitepaperDirectory, files[0]), "utf-8");
   const { data, content } = matter(raw);
   return { frontmatter: data as WhitepaperFrontmatter, content };
+}
+
+export interface RoadmapFrontmatter {
+  title: string;
+  slug: string;
+  description?: string;
+}
+
+export function getRoadmap(): { frontmatter: RoadmapFrontmatter; content: string } {
+  const files = readMdxFiles(roadmapDirectory);
+  if (files.length === 0) {
+    throw new Error("No roadmap file found");
+  }
+  const raw = fs.readFileSync(path.join(roadmapDirectory, files[0]), "utf-8");
+  const { data, content } = matter(raw);
+  return { frontmatter: data as RoadmapFrontmatter, content };
 }
 
 export interface GlossaryFrontmatter {

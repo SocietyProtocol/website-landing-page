@@ -7,6 +7,8 @@ fragment PostsParts on Posts {
   author
   image
   cardImage
+  isIntro
+  order
   body
 }
 
@@ -18,6 +20,14 @@ fragment RolesParts on Roles {
   commitment
   responsibilities
   requirements
+}
+
+fragment RoadmapParts on Roadmap {
+  __typename
+  title
+  slug
+  description
+  body
 }
 
 fragment WhitepaperParts on Whitepaper {

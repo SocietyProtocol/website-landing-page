@@ -15,6 +15,7 @@ export default function NewsletterForm({
     useMailchimpSubscribe();
 
   const isCompact = variant === "compact";
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const wrapperStyles =
     variant === "underline"
@@ -42,8 +43,8 @@ export default function NewsletterForm({
         <span className={`text-white mx-${isCompact ? "2" : "3"} font-display ${textSize}`}>|</span>
         <button
           type="submit"
-          disabled={status === "loading"}
-          className={`font-display ${textSize} text-white hover:text-accent-cyan transition-colors shrink-0`}
+          disabled={status === "loading" || !isValidEmail}
+          className={`font-display ${textSize} text-white hover:text-accent-cyan transition-colors shrink-0 cursor-pointer disabled:cursor-not-allowed`}
         >
           SUBMIT
         </button>

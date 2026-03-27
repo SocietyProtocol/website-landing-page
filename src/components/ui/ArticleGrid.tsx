@@ -43,12 +43,14 @@ export default function ArticleGrid({ articles }: { articles: PostFrontmatter[] 
 
   return (
     <div ref={containerRef}>
-      <h2 className="font-display text-3xl md:text-[53px] font-normal leading-[0.7] mb-12">
-        Explore our Intro Articles
-      </h2>
+      <div className="flex items-center justify-between mb-12">
+        <h2 className="font-display text-3xl md:text-[53px] font-normal leading-[0.7]">
+          Explore our Intro Articles
+        </h2>
+      </div>
 
       {isDesktop ? (
-        <div className="grid grid-cols-3 gap-x-[14px] gap-y-10 justify-items-center">
+        <div className="grid grid-cols-3 gap-x-[14px] gap-y-[14px] justify-items-center">
           {articles.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}

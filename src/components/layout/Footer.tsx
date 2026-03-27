@@ -8,6 +8,7 @@ import { useMailchimpSubscribe } from "@/hooks/useMailchimpSubscribe";
 export default function Footer() {
   const { email, setEmail, status, message, handleSubscribe, resetStatus } =
     useMailchimpSubscribe();
+  const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   return (
     <footer className="relative bg-bg-footer text-text-primary overflow-hidden">
@@ -52,8 +53,8 @@ export default function Footer() {
                 <span className="text-[#CFCFCF] mx-2 font-display text-[16px] lg:text-[25px]">|</span>
                 <button
                   type="submit"
-                  disabled={status === "loading"}
-                  className="font-display text-[16px] lg:text-[25px] text-[#CFCFCF] hover:text-white transition-colors shrink-0"
+                  disabled={status === "loading" || !isValidEmail}
+                  className="font-display text-[16px] lg:text-[25px] text-[#CFCFCF] hover:text-white transition-colors shrink-0 cursor-pointer disabled:cursor-not-allowed"
                 >
                   SUBMIT
                 </button>

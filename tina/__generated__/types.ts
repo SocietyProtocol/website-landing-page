@@ -86,6 +86,8 @@ export type Query = {
   postsConnection: PostsConnection;
   roles: Roles;
   rolesConnection: RolesConnection;
+  roadmap: Roadmap;
+  roadmapConnection: RoadmapConnection;
   whitepaper: Whitepaper;
   whitepaperConnection: WhitepaperConnection;
   glossary: Glossary;
@@ -145,6 +147,21 @@ export type QueryRolesConnectionArgs = {
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<RolesFilter>;
+};
+
+
+export type QueryRoadmapArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryRoadmapConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<RoadmapFilter>;
 };
 
 
@@ -210,6 +227,7 @@ export type QueryTeamConnectionArgs = {
 export type DocumentFilter = {
   posts?: InputMaybe<PostsFilter>;
   roles?: InputMaybe<RolesFilter>;
+  roadmap?: InputMaybe<RoadmapFilter>;
   whitepaper?: InputMaybe<WhitepaperFilter>;
   glossary?: InputMaybe<GlossaryFilter>;
   ideology?: InputMaybe<IdeologyFilter>;
@@ -253,7 +271,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Posts | Roles | Whitepaper | Glossary | Ideology | Team | Folder;
+export type DocumentNode = Posts | Roles | Roadmap | Whitepaper | Glossary | Ideology | Team | Folder;
 
 export type Posts = Node & Document & {
   __typename?: 'Posts';
@@ -264,6 +282,8 @@ export type Posts = Node & Document & {
   author?: Maybe<Scalars['String']['output']>;
   image?: Maybe<Scalars['String']['output']>;
   cardImage?: Maybe<Scalars['String']['output']>;
+  isIntro?: Maybe<Scalars['Boolean']['output']>;
+  order?: Maybe<Scalars['Float']['output']>;
   body?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -292,6 +312,21 @@ export type ImageFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type NumberFilter = {
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  eq?: InputMaybe<Scalars['Float']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
 export type PostsFilter = {
   title?: InputMaybe<StringFilter>;
   slug?: InputMaybe<StringFilter>;
@@ -300,6 +335,8 @@ export type PostsFilter = {
   author?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
   cardImage?: InputMaybe<ImageFilter>;
+  isIntro?: InputMaybe<BooleanFilter>;
+  order?: InputMaybe<NumberFilter>;
   body?: InputMaybe<StringFilter>;
 };
 
@@ -349,6 +386,37 @@ export type RolesConnection = Connection & {
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
   edges?: Maybe<Array<Maybe<RolesConnectionEdges>>>;
+};
+
+export type Roadmap = Node & Document & {
+  __typename?: 'Roadmap';
+  title: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type RoadmapFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+};
+
+export type RoadmapConnectionEdges = {
+  __typename?: 'RoadmapConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Roadmap>;
+};
+
+export type RoadmapConnection = Connection & {
+  __typename?: 'RoadmapConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<RoadmapConnectionEdges>>>;
 };
 
 export type Whitepaper = Node & Document & {
@@ -460,16 +528,6 @@ export type Team = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
-export type NumberFilter = {
-  lt?: InputMaybe<Scalars['Float']['input']>;
-  lte?: InputMaybe<Scalars['Float']['input']>;
-  gte?: InputMaybe<Scalars['Float']['input']>;
-  gt?: InputMaybe<Scalars['Float']['input']>;
-  eq?: InputMaybe<Scalars['Float']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-};
-
 export type TeamFilter = {
   title?: InputMaybe<StringFilter>;
   slug?: InputMaybe<StringFilter>;
@@ -506,6 +564,8 @@ export type Mutation = {
   createPosts: Posts;
   updateRoles: Roles;
   createRoles: Roles;
+  updateRoadmap: Roadmap;
+  createRoadmap: Roadmap;
   updateWhitepaper: Whitepaper;
   createWhitepaper: Whitepaper;
   updateGlossary: Glossary;
@@ -574,6 +634,18 @@ export type MutationCreateRolesArgs = {
 };
 
 
+export type MutationUpdateRoadmapArgs = {
+  relativePath: Scalars['String']['input'];
+  params: RoadmapMutation;
+};
+
+
+export type MutationCreateRoadmapArgs = {
+  relativePath: Scalars['String']['input'];
+  params: RoadmapMutation;
+};
+
+
 export type MutationUpdateWhitepaperArgs = {
   relativePath: Scalars['String']['input'];
   params: WhitepaperMutation;
@@ -624,6 +696,7 @@ export type MutationCreateTeamArgs = {
 export type DocumentUpdateMutation = {
   posts?: InputMaybe<PostsMutation>;
   roles?: InputMaybe<RolesMutation>;
+  roadmap?: InputMaybe<RoadmapMutation>;
   whitepaper?: InputMaybe<WhitepaperMutation>;
   glossary?: InputMaybe<GlossaryMutation>;
   ideology?: InputMaybe<IdeologyMutation>;
@@ -634,6 +707,7 @@ export type DocumentUpdateMutation = {
 export type DocumentMutation = {
   posts?: InputMaybe<PostsMutation>;
   roles?: InputMaybe<RolesMutation>;
+  roadmap?: InputMaybe<RoadmapMutation>;
   whitepaper?: InputMaybe<WhitepaperMutation>;
   glossary?: InputMaybe<GlossaryMutation>;
   ideology?: InputMaybe<IdeologyMutation>;
@@ -648,6 +722,8 @@ export type PostsMutation = {
   author?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   cardImage?: InputMaybe<Scalars['String']['input']>;
+  isIntro?: InputMaybe<Scalars['Boolean']['input']>;
+  order?: InputMaybe<Scalars['Float']['input']>;
   body?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -658,6 +734,13 @@ export type RolesMutation = {
   commitment?: InputMaybe<Scalars['String']['input']>;
   responsibilities?: InputMaybe<Scalars['String']['input']>;
   requirements?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type RoadmapMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type WhitepaperMutation = {
@@ -693,9 +776,11 @@ export type TeamMutation = {
   lensUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type PostsPartsFragment = { __typename: 'Posts', title: string, slug: string, description: string, date?: string | null, author?: string | null, image?: string | null, cardImage?: string | null, body?: string | null };
+export type PostsPartsFragment = { __typename: 'Posts', title: string, slug: string, description: string, date?: string | null, author?: string | null, image?: string | null, cardImage?: string | null, isIntro?: boolean | null, order?: number | null, body?: string | null };
 
 export type RolesPartsFragment = { __typename: 'Roles', title: string, slug: string, emoji?: string | null, commitment: string, responsibilities: string, requirements: string };
+
+export type RoadmapPartsFragment = { __typename: 'Roadmap', title: string, slug: string, description?: string | null, body?: string | null };
 
 export type WhitepaperPartsFragment = { __typename: 'Whitepaper', title: string, slug: string, description?: string | null, body?: string | null };
 
@@ -710,7 +795,7 @@ export type PostsQueryVariables = Exact<{
 }>;
 
 
-export type PostsQuery = { __typename?: 'Query', posts: { __typename: 'Posts', id: string, title: string, slug: string, description: string, date?: string | null, author?: string | null, image?: string | null, cardImage?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PostsQuery = { __typename?: 'Query', posts: { __typename: 'Posts', id: string, title: string, slug: string, description: string, date?: string | null, author?: string | null, image?: string | null, cardImage?: string | null, isIntro?: boolean | null, order?: number | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PostsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -722,7 +807,7 @@ export type PostsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PostsConnectionQuery = { __typename?: 'Query', postsConnection: { __typename?: 'PostsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostsConnectionEdges', cursor: string, node?: { __typename: 'Posts', id: string, title: string, slug: string, description: string, date?: string | null, author?: string | null, image?: string | null, cardImage?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PostsConnectionQuery = { __typename?: 'Query', postsConnection: { __typename?: 'PostsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostsConnectionEdges', cursor: string, node?: { __typename: 'Posts', id: string, title: string, slug: string, description: string, date?: string | null, author?: string | null, image?: string | null, cardImage?: string | null, isIntro?: boolean | null, order?: number | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type RolesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -742,6 +827,25 @@ export type RolesConnectionQueryVariables = Exact<{
 
 
 export type RolesConnectionQuery = { __typename?: 'Query', rolesConnection: { __typename?: 'RolesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'RolesConnectionEdges', cursor: string, node?: { __typename: 'Roles', id: string, title: string, slug: string, emoji?: string | null, commitment: string, responsibilities: string, requirements: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type RoadmapQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type RoadmapQuery = { __typename?: 'Query', roadmap: { __typename: 'Roadmap', id: string, title: string, slug: string, description?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type RoadmapConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<RoadmapFilter>;
+}>;
+
+
+export type RoadmapConnectionQuery = { __typename?: 'Query', roadmapConnection: { __typename?: 'RoadmapConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'RoadmapConnectionEdges', cursor: string, node?: { __typename: 'Roadmap', id: string, title: string, slug: string, description?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type WhitepaperQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -829,6 +933,8 @@ export const PostsPartsFragmentDoc = gql`
   author
   image
   cardImage
+  isIntro
+  order
   body
 }
     `;
@@ -841,6 +947,15 @@ export const RolesPartsFragmentDoc = gql`
   commitment
   responsibilities
   requirements
+}
+    `;
+export const RoadmapPartsFragmentDoc = gql`
+    fragment RoadmapParts on Roadmap {
+  __typename
+  title
+  slug
+  description
+  body
 }
     `;
 export const WhitepaperPartsFragmentDoc = gql`
@@ -998,6 +1113,63 @@ export const RolesConnectionDocument = gql`
   }
 }
     ${RolesPartsFragmentDoc}`;
+export const RoadmapDocument = gql`
+    query roadmap($relativePath: String!) {
+  roadmap(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...RoadmapParts
+  }
+}
+    ${RoadmapPartsFragmentDoc}`;
+export const RoadmapConnectionDocument = gql`
+    query roadmapConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: RoadmapFilter) {
+  roadmapConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...RoadmapParts
+      }
+    }
+  }
+}
+    ${RoadmapPartsFragmentDoc}`;
 export const WhitepaperDocument = gql`
     query whitepaper($relativePath: String!) {
   whitepaper(relativePath: $relativePath) {
@@ -1240,6 +1412,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     rolesConnection(variables?: RolesConnectionQueryVariables, options?: C): Promise<{data: RolesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RolesConnectionQueryVariables, query: string}> {
         return requester<{data: RolesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RolesConnectionQueryVariables, query: string}, RolesConnectionQueryVariables>(RolesConnectionDocument, variables, options);
+      },
+    roadmap(variables: RoadmapQueryVariables, options?: C): Promise<{data: RoadmapQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RoadmapQueryVariables, query: string}> {
+        return requester<{data: RoadmapQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RoadmapQueryVariables, query: string}, RoadmapQueryVariables>(RoadmapDocument, variables, options);
+      },
+    roadmapConnection(variables?: RoadmapConnectionQueryVariables, options?: C): Promise<{data: RoadmapConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RoadmapConnectionQueryVariables, query: string}> {
+        return requester<{data: RoadmapConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: RoadmapConnectionQueryVariables, query: string}, RoadmapConnectionQueryVariables>(RoadmapConnectionDocument, variables, options);
       },
     whitepaper(variables: WhitepaperQueryVariables, options?: C): Promise<{data: WhitepaperQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WhitepaperQueryVariables, query: string}> {
         return requester<{data: WhitepaperQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: WhitepaperQueryVariables, query: string}, WhitepaperQueryVariables>(WhitepaperDocument, variables, options);

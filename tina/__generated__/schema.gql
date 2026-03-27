@@ -58,6 +58,8 @@ type Query {
   postsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PostsFilter): PostsConnection!
   roles(relativePath: String): Roles!
   rolesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: RolesFilter): RolesConnection!
+  roadmap(relativePath: String): Roadmap!
+  roadmapConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: RoadmapFilter): RoadmapConnection!
   whitepaper(relativePath: String): Whitepaper!
   whitepaperConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: WhitepaperFilter): WhitepaperConnection!
   glossary(relativePath: String): Glossary!
@@ -71,6 +73,7 @@ type Query {
 input DocumentFilter {
   posts: PostsFilter
   roles: RolesFilter
+  roadmap: RoadmapFilter
   whitepaper: WhitepaperFilter
   glossary: GlossaryFilter
   ideology: IdeologyFilter
@@ -100,7 +103,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Posts | Roles | Whitepaper | Glossary | Ideology | Team | Folder
+union DocumentNode = Posts | Roles | Roadmap | Whitepaper | Glossary | Ideology | Team | Folder
 
 type Posts implements Node & Document {
   title: String!
@@ -110,6 +113,8 @@ type Posts implements Node & Document {
   author: String
   image: String
   cardImage: String
+  isIntro: Boolean
+  order: Float
   body: String
   id: ID!
   _sys: SystemInfo!
@@ -138,6 +143,21 @@ input ImageFilter {
   in: [String]
 }
 
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
 input PostsFilter {
   title: StringFilter
   slug: StringFilter
@@ -146,6 +166,8 @@ input PostsFilter {
   author: StringFilter
   image: ImageFilter
   cardImage: ImageFilter
+  isIntro: BooleanFilter
+  order: NumberFilter
   body: StringFilter
 }
 
@@ -190,6 +212,34 @@ type RolesConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [RolesConnectionEdges]
+}
+
+type Roadmap implements Node & Document {
+  title: String!
+  slug: String!
+  description: String
+  body: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input RoadmapFilter {
+  title: StringFilter
+  slug: StringFilter
+  description: StringFilter
+  body: StringFilter
+}
+
+type RoadmapConnectionEdges {
+  cursor: String!
+  node: Roadmap
+}
+
+type RoadmapConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [RoadmapConnectionEdges]
 }
 
 type Whitepaper implements Node & Document {
@@ -291,16 +341,6 @@ type Team implements Node & Document {
   _values: JSON!
 }
 
-input NumberFilter {
-  lt: Float
-  lte: Float
-  gte: Float
-  gt: Float
-  eq: Float
-  exists: Boolean
-  in: [Float]
-}
-
 input TeamFilter {
   title: StringFilter
   slug: StringFilter
@@ -334,6 +374,8 @@ type Mutation {
   createPosts(relativePath: String!, params: PostsMutation!): Posts!
   updateRoles(relativePath: String!, params: RolesMutation!): Roles!
   createRoles(relativePath: String!, params: RolesMutation!): Roles!
+  updateRoadmap(relativePath: String!, params: RoadmapMutation!): Roadmap!
+  createRoadmap(relativePath: String!, params: RoadmapMutation!): Roadmap!
   updateWhitepaper(relativePath: String!, params: WhitepaperMutation!): Whitepaper!
   createWhitepaper(relativePath: String!, params: WhitepaperMutation!): Whitepaper!
   updateGlossary(relativePath: String!, params: GlossaryMutation!): Glossary!
@@ -347,6 +389,7 @@ type Mutation {
 input DocumentUpdateMutation {
   posts: PostsMutation
   roles: RolesMutation
+  roadmap: RoadmapMutation
   whitepaper: WhitepaperMutation
   glossary: GlossaryMutation
   ideology: IdeologyMutation
@@ -357,6 +400,7 @@ input DocumentUpdateMutation {
 input DocumentMutation {
   posts: PostsMutation
   roles: RolesMutation
+  roadmap: RoadmapMutation
   whitepaper: WhitepaperMutation
   glossary: GlossaryMutation
   ideology: IdeologyMutation
@@ -371,6 +415,8 @@ input PostsMutation {
   author: String
   image: String
   cardImage: String
+  isIntro: Boolean
+  order: Float
   body: String
 }
 
@@ -381,6 +427,13 @@ input RolesMutation {
   commitment: String
   responsibilities: String
   requirements: String
+}
+
+input RoadmapMutation {
+  title: String
+  slug: String
+  description: String
+  body: String
 }
 
 input WhitepaperMutation {

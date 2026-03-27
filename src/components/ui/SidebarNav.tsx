@@ -31,7 +31,7 @@ export default function SidebarNav({ headings }: { headings: Heading[] }) {
 
   if (headings.length === 0) {
     return (
-      <span className="font-heading text-[16px] text-[#4f4f4f]">
+      <span className="font-heading text-[15px] text-[#4f4f4f]">
         No sections yet
       </span>
     );
@@ -47,22 +47,22 @@ export default function SidebarNav({ headings }: { headings: Heading[] }) {
         const isActive = h.id === activeId;
         let prefix = "";
         let indent = "";
-        let fontSize = "text-[18px]";
+        let fontSize = "text-[17px]";
 
         if (h.level === 1) {
           h1Count++;
           h2Count = 0;
           prefix = `${h1Count}. `;
-          fontSize = "text-[18px]";
+          fontSize = "text-[17px]";
         } else if (h.level === 2) {
           h2Count++;
           prefix = `${h1Count}.${h2Count}. `;
           indent = "pl-3";
-          fontSize = "text-[16px]";
+          fontSize = "text-[15px]";
         } else if (h.level === 3) {
           prefix = "• ";
           indent = "pl-6";
-          fontSize = "text-[15px]";
+          fontSize = "text-[14px]";
         }
 
         return (

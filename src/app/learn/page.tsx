@@ -5,12 +5,12 @@ import mediaCids from "@/data/media-cids.json";
 // TODO: Uncomment when side videos are done
 // import ScrollContainer from "@/components/ui/ScrollContainer";
 import ArticleGrid from "@/components/ui/ArticleGrid";
-import { getAllPosts } from "@/lib/mdx";
+import { getIntroPosts } from "@/lib/mdx";
 
 export const metadata: Metadata = { title: "Learn" };
 
 export default function Learn() {
-  const articles = getAllPosts();
+  const articles = getIntroPosts();
 
   return (
     <div
@@ -155,6 +155,6 @@ const resourceCards = [
   {
     title: "Explore the Glossary",
     description: "Understand our terminology.",
-    href: "#",
+    href: "/glossary",
   },
 ];

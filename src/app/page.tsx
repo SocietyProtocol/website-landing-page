@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import NewsletterForm from "@/components/ui/NewsletterForm";
-import { getAllPosts } from "@/lib/mdx";
+import { getIntroPosts } from "@/lib/mdx";
 import ShuffledArticles from "@/components/ui/ShuffledArticles";
 import VideoPlayer from "@/components/ui/VideoPlayer";
 import mediaCids from "@/data/media-cids.json";
@@ -10,7 +10,7 @@ import mediaCids from "@/data/media-cids.json";
 export const metadata: Metadata = { title: "Home" };
 
 export default function Home() {
-  const articles = getAllPosts();
+  const articles = getIntroPosts();
 
   return (
     <div className="min-h-screen bg-repeat-y bg-top bg-[length:100%_auto]" style={{ backgroundImage: "url(/images/group-131-bg.png)" }}>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { getAllPostSlugs, getPostBySlug, getAllPosts, PLACEHOLDER_SLUG } from "@/lib/mdx";
 import { extractHeadings } from "@/lib/mdx-components";
 import MdxArticleLayout from "@/components/layout/MdxArticleLayout";
+import ArticleVideoButton from "@/components/ui/ArticleVideoButton";
 
 export const dynamicParams = false;
 
@@ -48,7 +49,7 @@ export default async function ArticlePage({
   return (
     <div className="min-h-screen bg-repeat-y bg-top bg-[length:100%_auto]" style={{ backgroundImage: "url(/images/group-131-bg.png)" }}>
       {/* 1. Hero */}
-      <section className="max-w-[1400px] mx-auto px-8 pt-36 pb-12">
+      <section className="max-w-[1600px] mx-auto px-8 pt-36 pb-12">
         <span className="font-mono text-[18px] tracking-widest text-[#7A7A7A] mb-10 block">
           / Published - {frontmatter.date ? new Date(frontmatter.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : ""} &nbsp; Written by: {frontmatter.author || "Anton"}
         </span>
@@ -58,7 +59,7 @@ export default async function ArticlePage({
       </section>
 
       {/* 2. Hero Image */}
-      <section className="max-w-[1400px] mx-auto px-8 pb-16">
+      <section className="max-w-[1600px] mx-auto px-8 pb-16">
         <div className="relative aspect-[1549/480] overflow-hidden rounded-[20px]">
           <Image
             src={frontmatter.image}
@@ -69,13 +70,20 @@ export default async function ArticlePage({
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0d1017] via-transparent to-transparent" />
+          {frontmatter.videoUrl && (
+            <ArticleVideoButton
+              videoUrl={frontmatter.videoUrl}
+              poster={frontmatter.image}
+              title={frontmatter.title}
+            />
+          )}
         </div>
       </section>
 
       {/* 3. Article Body + Related Articles */}
       <MdxArticleLayout content={content} headings={headings}>
         {/* 4. Related Articles Grid */}
-        <section className="max-w-[1400px] mx-auto px-8 pb-32">
+        <section className="max-w-[1600px] mx-auto px-8 pb-32">
           <h2 className="font-display text-3xl md:text-[52.69px] font-normal leading-[0.7] mb-10">
             Explore our Intro Articles
           </h2>

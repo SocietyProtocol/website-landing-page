@@ -63,6 +63,18 @@ export default defineConfig({
             description: "Background image for article cards. Falls back to Cover Image if empty.",
           },
           {
+            name: "isIntro",
+            label: "Intro Article",
+            type: "boolean",
+            description: "Show in 'Explore our Intro Articles' section on homepage and learn page.",
+          },
+          {
+            name: "order",
+            label: "Intro Order",
+            type: "number",
+            description: "Display order within the intro articles section (lower = first).",
+          },
+          {
             name: "body",
             label: "Body (MDX)",
             type: "string",
@@ -118,6 +130,41 @@ export default defineConfig({
             label: "Requirements",
             type: "string",
             required: true,
+            ui: {
+              component: "textarea",
+            },
+          },
+        ],
+      },
+      {
+        label: "Roadmap",
+        name: "roadmap",
+        path: "content/roadmap",
+        format: "mdx",
+        fields: [
+          {
+            name: "title",
+            label: "Title",
+            type: "string",
+            isTitle: true,
+            required: true,
+          },
+          {
+            name: "slug",
+            label: "Slug",
+            type: "string",
+            required: true,
+          },
+          {
+            name: "description",
+            label: "Description",
+            type: "string",
+          },
+          {
+            name: "body",
+            label: "Body (MDX)",
+            type: "string",
+            isBody: true,
             ui: {
               component: "textarea",
             },
