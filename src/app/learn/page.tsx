@@ -34,7 +34,7 @@ export default function Learn() {
           {/* Featured Video Card */}
           <div className="relative rounded-[38px] overflow-hidden border border-[#656464] aspect-[897/484]">
             <VideoPlayer
-              src={mediaCids["narrative-video-sp.mp4"]}
+              src={mediaCids["game-theory-101.mp4"] || mediaCids["narrative-video-sp.mp4"]}
               poster="/images/video-thumbnail.png"
               title="How Society Protocol Works"
               label="GAME THEORY 101"
@@ -145,7 +145,7 @@ const resourceCards = [
   {
     title: "Read the Whitepaper",
     description: "Do a deep dive on the technical details.",
-    href: "#",
+    href: "/whitepaper",
   },
   {
     title: "Explore the Handbook",

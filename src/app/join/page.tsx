@@ -194,7 +194,7 @@ export default function Join() {
           </a>
 
           {/* Join The Team Card */}
-          <div className="md:col-span-2 lg:col-span-4 lg:order-6 relative flex flex-col justify-between rounded-[38px] aspect-[1781/968]">
+          <div className="md:col-span-2 lg:col-span-4 lg:order-6 relative flex flex-col justify-between rounded-[38px] aspect-[4/3] sm:aspect-[1781/968]">
             <Image
               src="/images/join-the-team-bg.png"
               alt=""

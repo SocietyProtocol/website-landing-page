@@ -52,6 +52,17 @@ export default function About() {
               fulfill the promise of accomplishing this transition while
               remaining true to its ideological foundations.
             </p>
+            <div className="mt-8">
+              <Link
+                href="/roadmap"
+                className="inline-flex items-center gap-2 font-mono text-[18px] bg-white text-black rounded-[38px] px-8 py-3 hover:bg-white/90 transition-colors"
+              >
+                VIEW THE ROADMAP
+                <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 1L6 6L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+            </div>
           </div>
         </div>
         {/* Desktop: original two-column layout with vector bg */}
@@ -83,6 +94,17 @@ export default function About() {
                 fulfill the promise of accomplishing this transition while
                 remaining true to its ideological foundations.
               </p>
+              <div className="mt-8">
+                <Link
+                  href="/roadmap"
+                  className="inline-flex items-center gap-2 font-mono text-[18px] bg-white text-black rounded-[38px] px-8 py-3 hover:bg-white/90 transition-colors"
+                >
+                  VIEW THE ROADMAP
+                  <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L6 6L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -95,7 +117,7 @@ export default function About() {
             Explore Our Core Values
           </h2>
           <Link
-            href="/learn"
+            href="/ideology"
             className="hidden md:inline-flex items-center gap-2 font-mono text-[18px] bg-white text-black rounded-[38px] px-8 py-3 hover:bg-white/90 transition-colors shrink-0"
           >
             EXPLORE OUR IDEOLOGY
@@ -118,7 +140,7 @@ export default function About() {
         </div>
         <div className="flex md:hidden mb-6">
           <Link
-            href="/learn"
+            href="/ideology"
             className="inline-flex items-center gap-2 font-mono text-[18px] bg-white text-black rounded-[38px] px-8 py-3 hover:bg-white/90 transition-colors"
           >
             EXPLORE OUR IDEOLOGY

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
 
 const PlayIcon = () => (
@@ -21,22 +21,13 @@ export default function VideoPlayer({
   label: string
 }) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null)
   const [started, setStarted] = useState(false)
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current)
-    }
-  }, [])
 
   function handlePlay() {
     const video = videoRef.current
     if (!video) return
     setStarted(true)
-    timeoutRef.current = setTimeout(() => {
-      video.play().catch(() => setStarted(false))
-    }, 50)
+    video.play().catch(() => setStarted(false))
   }
 
   const hasOverlayText = label || title

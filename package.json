@@ -17,6 +17,7 @@
     "panzoom": "^9.4.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "remark-gfm": "^4.0.1",
     "tinacms": "^3.6.1"
   },
   "overrides": {

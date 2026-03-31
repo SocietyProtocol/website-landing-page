@@ -291,7 +291,56 @@ Complete these items in order:
 
 ---
 
-## 9. Local Development Reference
+## 9. MDX Authoring — Advanced Content Features
+
+The article body is plain MDX written in a textarea in TinaCMS. Beyond standard markdown, two special features are available.
+
+### SideQuote
+
+A `<SideQuote>` block renders a styled callout. On desktop it floats into the left sidebar alongside the text; on mobile it appears inline.
+
+**Syntax:**
+```mdx
+<SideQuote title="Optional title:">
+The body text of the side quote goes here.
+</SideQuote>
+```
+
+- `title` is optional. If omitted, only the body text is shown.
+- Place it inline in the article body, just before or alongside the paragraph it relates to.
+- Do not put markdown block elements (headings, lists) inside a `<SideQuote>`.
+
+**Example from an existing article:**
+```mdx
+<SideQuote title="The Prisoner's Dilemma:">
+Two players each do better by betraying, yet mutual cooperation beats mutual betrayal. Scale this to millions of daily interactions and you get civilization's core tension.
+</SideQuote>
+```
+
+---
+
+### Footnotes
+
+Footnotes use standard GFM (GitHub Flavored Markdown) syntax. Place the reference inline in the text and define all footnotes together at the bottom of the article under a `### Footnotes` heading.
+
+**Syntax:**
+```mdx
+Some claim in the article text[^1], and another point here[^2].
+
+### Footnotes
+[^1]: The definition of the first footnote.
+[^2]: The definition of the second footnote.
+```
+
+- References (`[^1]`) render as clickable superscripts in the text.
+- Clicking a superscript jumps to the footnote definition at the bottom.
+- Each definition has a back-link to return to the reference in the text.
+- The `### Footnotes` heading is a convention used across all existing articles — it is not required by the renderer but keeps the body organized.
+- Footnote numbers must be unique within a single article. They can be any identifier (e.g. `[^bitcoin]`) not just numbers.
+
+---
+
+## 10. Local Development Reference
 
 For developers making code changes:
 

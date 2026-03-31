@@ -85,14 +85,7 @@ export default function Home() {
               alt="Society Protocol app"
               width={1200}
               height={800}
-              className="w-full h-auto object-cover rounded-[14px] invisible"
-              aria-hidden="true"
-            />
-            <VideoPlayer
-              src={mediaCids["narrative-video-sp.mp4"]}
-              poster="/images/rectangle.png"
-              title=""
-              label=""
+              className="w-full h-auto object-cover rounded-[14px]"
             />
           </div>
 
@@ -140,7 +133,7 @@ export default function Home() {
         <div className="flex flex-col items-center gap-6 lg:hidden">
           <div className="relative rounded-[20px] overflow-hidden aspect-[925/555] w-full md:w-[70%]">
             <VideoPlayer
-              src={mediaCids["narrative-video-sp.mp4"]}
+              src={mediaCids["game-theory-101.mp4"]}
               poster="/images/video-thumbnail.png"
               title="How Society Protocol Works"
               label="GAME THEORY 101"
@@ -152,14 +145,14 @@ export default function Home() {
                 <h3 className="font-display text-[30px] font-normal leading-[1] mb-3">Read the Whitepaper</h3>
                 <p className="font-body text-[20px] text-[#7A7A7A]">Do a deep dive on the technical details.</p>
               </div>
-              <div className="mt-6"><Button href="/learn">READ DOC</Button></div>
+              <div className="mt-6"><Button href="/whitepaper">READ DOC</Button></div>
             </div>
             <div className="relative flex-1 p-8 flex flex-col justify-between bg-[length:100%_100%] bg-center bg-no-repeat" style={{ backgroundImage: "url(/images/card-bg.png)", boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
               <div>
                 <h3 className="font-display text-[30px] font-normal leading-[1] mb-3">Explore the Handbook</h3>
                 <p className="font-body text-[20px] text-[#7A7A7A]">Learn how Society Protocol works.</p>
               </div>
-              <div className="mt-6"><Button href="/learn">READ DOC</Button></div>
+              <div className="mt-6"><Button href="/Published/Handbook">READ DOC</Button></div>
             </div>
           </div>
         </div>
@@ -168,7 +161,7 @@ export default function Home() {
         <div className="hidden lg:grid grid-cols-[3fr_2fr] gap-6">
           <div className="relative rounded-[20px] overflow-hidden aspect-[925/555]">
             <VideoPlayer
-              src={mediaCids["narrative-video-sp.mp4"]}
+              src={mediaCids["game-theory-101.mp4"]}
               poster="/images/video-thumbnail.png"
               title="How Society Protocol Works"
               label="GAME THEORY 101"
@@ -180,14 +173,14 @@ export default function Home() {
                 <h3 className="font-display text-[30px] font-normal leading-[1] mb-3">Read the Whitepaper</h3>
                 <p className="font-body text-[20px] text-[#7A7A7A]">Do a deep dive on the technical details.</p>
               </div>
-              <div className="mt-6"><Button href="/learn">READ DOC</Button></div>
+              <div className="mt-6"><Button href="/whitepaper">READ DOC</Button></div>
             </div>
             <div className="relative flex-1 p-8 flex flex-col justify-between bg-[length:100%_100%] bg-center bg-no-repeat" style={{ backgroundImage: "url(/images/card-bg.png)", boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
               <div>
                 <h3 className="font-display text-[30px] font-normal leading-[1] mb-3">Explore the Handbook</h3>
                 <p className="font-body text-[20px] text-[#7A7A7A]">Learn how Society Protocol works.</p>
               </div>
-              <div className="mt-6"><Button href="/learn">READ DOC</Button></div>
+              <div className="mt-6"><Button href="/Published/Handbook">READ DOC</Button></div>
             </div>
           </div>
         </div>

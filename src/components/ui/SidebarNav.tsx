@@ -37,7 +37,9 @@ export default function SidebarNav({ headings }: { headings: Heading[] }) {
     );
   }
 
-  // Build numbering: H1 gets top-level number, H2 gets sub-number, H3 gets bullet
+  // Build numbering: H1 gets top-level number, H2 gets sub-number, H3 gets bullet.
+  // If no H1 exists, treat H2 as top-level to avoid "0.1, 0.2" prefixes.
+  const hasH1 = headings.some((h) => h.level === 1);
   let h1Count = 0;
   let h2Count = 0;
 
@@ -56,8 +58,12 @@ export default function SidebarNav({ headings }: { headings: Heading[] }) {
           fontSize = "text-[18px]";
         } else if (h.level === 2) {
           h2Count++;
-          prefix = `${h1Count}.${h2Count}. `;
-          indent = "pl-3";
+          if (!hasH1) {
+            prefix = `${h2Count}. `;
+          } else {
+            prefix = `${h1Count}.${h2Count}. `;
+            indent = "pl-3";
+          }
           fontSize = "text-[16px]";
         } else if (h.level === 3) {
           prefix = "• ";
