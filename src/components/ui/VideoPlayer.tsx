@@ -60,7 +60,7 @@ export default function VideoPlayer({
     function onStalled() {
       // stalled fires after ~3 s of no data; give 4 s more before switching
       stallTimer = setTimeout(() => {
-        if (video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) tryNext()
+        if (video && video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) tryNext()
       }, 4000)
     }
 
