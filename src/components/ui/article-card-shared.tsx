@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import VideoPlayer from "@/components/ui/VideoPlayer";
+import { ipfsWithFallbacks } from "@/lib/ipfs";
 import type { PostFrontmatter } from "@/lib/mdx";
 
 export const CARD_WIDTH = 428;
@@ -45,7 +46,7 @@ function VideoModal({ article, onClose }: { article: PostFrontmatter; onClose: (
       >
         <div className="relative rounded-[38px] overflow-hidden border border-[#656464] aspect-[897/484]">
           <VideoPlayer
-            src={article.videoUrl!}
+            src={ipfsWithFallbacks(article.videoUrl!)}
             poster={article.image}
             title={article.title}
             label=""

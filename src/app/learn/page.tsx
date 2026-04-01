@@ -34,8 +34,8 @@ export default function Learn() {
           {/* Featured Video Card */}
           <div className="relative rounded-[38px] overflow-hidden border border-[#656464] aspect-[897/484]">
             <VideoPlayer
-              src={mediaCids["game-theory-101.mp4"] || mediaCids["narrative-video-sp.mp4"]}
-              poster="/images/video-thumbnail.png"
+              src={mediaCids["game-theory-video2.mp4"] || mediaCids["narrative-video-sp.mp4"]}
+              poster="/images/game_theory_thumbnail.png"
               title="How Society Protocol Works"
               label="GAME THEORY 101"
             />

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Image from 'next/image'
 
 const PlayIcon = () => (
@@ -15,19 +15,74 @@ export default function VideoPlayer({
   title,
   label,
 }: {
-  src: string
+  src: string | string[]
   poster: string
   title: string
   label: string
 }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [started, setStarted] = useState(false)
+  const [srcIndex, setSrcIndex] = useState(0)
+  const sources = Array.isArray(src) ? src : [src]
 
-  function handlePlay() {
+  useEffect(() => {
+    if (!started) return
     const video = videoRef.current
     if (!video) return
+
+    video.load()
+
+    let switched = false
+    function tryNext() {
+      if (switched) return
+      switched = true
+      setSrcIndex(prev => {
+        const next = prev + 1
+        if (next < sources.length) return next
+        // All sources exhausted — show poster
+        setStarted(false)
+        return 0
+      })
+    }
+
+    video.play().catch((err: unknown) => {
+      // AbortError is expected when load() supersedes play() — ignore it.
+      if (err instanceof DOMException && err.name === 'AbortError') return
+      // For all other failures, try the next gateway.
+      // Do NOT call setStarted(false) here — that would stop the fallback chain.
+      tryNext()
+    })
+
+    let stallTimer: ReturnType<typeof setTimeout>
+
+    function onError() { tryNext() }
+
+    function onStalled() {
+      // stalled fires after ~3 s of no data; give 4 s more before switching
+      stallTimer = setTimeout(() => {
+        if (video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) tryNext()
+      }, 4000)
+    }
+
+    function onProgress() { clearTimeout(stallTimer) }
+
+    video.addEventListener('error', onError)
+    video.addEventListener('stalled', onStalled)
+    video.addEventListener('progress', onProgress)
+    video.addEventListener('playing', onProgress)
+
+    return () => {
+      clearTimeout(stallTimer)
+      video.removeEventListener('error', onError)
+      video.removeEventListener('stalled', onStalled)
+      video.removeEventListener('progress', onProgress)
+      video.removeEventListener('playing', onProgress)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [started, srcIndex])
+
+  function handlePlay() {
     setStarted(true)
-    video.play().catch(() => setStarted(false))
   }
 
   const hasOverlayText = label || title
@@ -38,8 +93,8 @@ export default function VideoPlayer({
         ref={videoRef}
         controls
         preload="none"
-        src={src}
-        onEnded={() => setStarted(false)}
+        src={sources[srcIndex]}
+        onEnded={() => { setStarted(false); setSrcIndex(0) }}
         className={`absolute inset-0 w-full h-full object-cover ${started ? '' : 'hidden'}`}
       />
       {!started && (

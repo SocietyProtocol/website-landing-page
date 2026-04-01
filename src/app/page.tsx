@@ -140,8 +140,8 @@ export default function Home() {
         <div className="flex flex-col items-center gap-6 lg:hidden">
           <div className="relative rounded-[20px] overflow-hidden aspect-[925/555] w-full md:w-[70%]">
             <VideoPlayer
-              src={mediaCids["game-theory-101.mp4"]}
-              poster="/images/video-thumbnail.png"
+              src={mediaCids["game-theory-video2.mp4"]}
+              poster="/images/game_theory_thumbnail.png"
               title="How Society Protocol Works"
               label="GAME THEORY 101"
             />
@@ -168,8 +168,8 @@ export default function Home() {
         <div className="hidden lg:grid grid-cols-[3fr_2fr] gap-6">
           <div className="relative rounded-[20px] overflow-hidden aspect-[925/555]">
             <VideoPlayer
-              src={mediaCids["game-theory-101.mp4"]}
-              poster="/images/video-thumbnail.png"
+              src={mediaCids["game-theory-video2.mp4"]}
+              poster="/images/game_theory_thumbnail.png"
               title="How Society Protocol Works"
               label="GAME THEORY 101"
             />
