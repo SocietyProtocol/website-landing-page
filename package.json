@@ -15,6 +15,7 @@
     "next": "^15.1.0",
     "next-mdx-remote": "^6.0.0",
     "panzoom": "^9.4.3",
+    "posthog-js": "^1.364.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "remark-gfm": "^4.0.1",

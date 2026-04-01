@@ -85,7 +85,14 @@ export default function Home() {
               alt="Society Protocol app"
               width={1200}
               height={800}
-              className="w-full h-auto object-cover rounded-[14px]"
+              className="w-full h-auto object-cover rounded-[14px] invisible"
+              aria-hidden="true"
+            />
+            <VideoPlayer
+              src={mediaCids["narrative-video-sp.mp4"]}
+              poster="/images/rectangle.png"
+              title=""
+              label=""
             />
           </div>
 
