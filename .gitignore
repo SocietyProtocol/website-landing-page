@@ -44,5 +44,8 @@ yarn-error.log*
 next-env.d.ts
 
 
-.claude 
+.claude
 /designs/
+
+# Media served from R2
+/public/media/

@@ -5,6 +5,7 @@ import NewsletterForm from "@/components/ui/NewsletterForm";
 import { getIntroPosts } from "@/lib/mdx";
 import ShuffledArticles from "@/components/ui/ShuffledArticles";
 import VideoPlayer from "@/components/ui/VideoPlayer";
+import IpfsImage from "@/components/ui/IpfsImage";
 import mediaCids from "@/data/media-cids.json";
 
 export const metadata: Metadata = { title: "Home" };
@@ -35,9 +36,8 @@ export default function Home() {
         </div>
         {/* sm-lg (640px-1023px): stacked layout with animated GIF */}
         <div className="hidden sm:flex sm:flex-col sm:items-center lg:hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={mediaCids["state-sphere-loop.gif"]}
+          <IpfsImage
+            sources={mediaCids["state-sphere-loop.gif"]}
             loading="lazy"
             alt="Abstract visualization"
             width={500}
@@ -63,9 +63,8 @@ export default function Home() {
               coordination
             </h1>
           </div>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={mediaCids["state-sphere-loop.gif"]}
+          <IpfsImage
+            sources={mediaCids["state-sphere-loop.gif"]}
             loading="lazy"
             alt="Abstract visualization"
             width={977}

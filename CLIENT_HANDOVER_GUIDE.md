@@ -11,6 +11,7 @@ The site is a fully static Next.js 15 application with:
 - **TinaCMS Cloud** — visual editor for non-technical content editing
 - **Storacha** — permanent IPFS + Filecoin storage (every deploy is archived)
 - **Cloudflare Pages** — fast global serving via CDN
+- **Cloudflare R2** — media file hosting via `media.societyprotocol.io` (IPFS as fallback)
 - **GitHub Actions** — automated CI/CD pipeline (self-hosted runner)
 
 Every push to the `main` branch automatically builds the site, uploads it to IPFS via Storacha, and deploys it to Cloudflare Pages. No manual deploys are needed.
@@ -38,6 +39,7 @@ Content editor
 |----------------------------------------|--------------------------------------------|
 | `https://new.societyprotocol.io`       | Live site (current, before domain cutover) |
 | `https://new.societyprotocol.io/admin` | TinaCMS editor                             |
+| `https://media.societyprotocol.io`     | Media files (R2 CDN)                       |
 | `https://storacha.link/ipfs/<CID>`     | Permanent IPFS archive of each deploy      |
 
 ---
@@ -245,25 +247,65 @@ Once `societyprotocol.io` is confirmed live on the new deployment:
 
 ---
 
-## 6. Media Upload (~4GB)
+## 6. Media Storage (Cloudflare R2 + IPFS Fallback)
 
-Large media files are stored on IPFS via Storacha and referenced by their content ID (CID). The upload script handles this.
+Media files (videos, GIFs) are served from **Cloudflare R2** via the custom domain `media.societyprotocol.io`. IPFS (Storacha) URLs are kept as fallback sources in case R2 is unavailable.
 
-### Prerequisites
+### How It Works
 
-```bash
-npm install -g @storacha/cli
-storacha space use <space-did>   # select the correct space
-```
+- `src/data/media-cids.json` contains an array of URLs for each media file — R2 URL first, then IPFS gateway URLs
+- The `VideoPlayer` and `IpfsImage` components try sources in order and fall back automatically on error
+- Article-specific videos use `videoUrl` in their MDX frontmatter (pointing to R2)
 
-### Accessing Uploaded Media
+### R2 Bucket Details
 
-Files are accessible at:
-```
-https://storacha.link/ipfs/<CID>
-```
+| Setting         | Value                          |
+|-----------------|--------------------------------|
+| Bucket name     | `society-protocol-media`       |
+| Custom domain   | `media.societyprotocol.io`     |
+| Location        | Automatic (Eastern Europe)     |
+| Storage class   | Standard                       |
 
-After running the script, rebuild and redeploy the site so the new CID mappings are included.
+### Adding New Media Files
+
+To add a new media file:
+
+1. **Upload to R2** — In Cloudflare dashboard → R2 → `society-protocol-media` → Objects → Upload (or via CLI: `npx wrangler r2 object put society-protocol-media/<filename> --file <local-path>`)
+
+2. **Upload to Storacha** (for IPFS fallback):
+   ```bash
+   npm install -g @storacha/cli
+   storacha space use did:key:z6Mkh1ZtfkZwfnNzHyqaWbHmHfsoRRYXNu1EiuNhWawAatme
+   storacha up <file> --json
+   # Returns: {"root":{"/":"<CID>"}}
+   ```
+
+3. **Update `src/data/media-cids.json`** — Add an entry with R2 URL first, then IPFS gateway URLs:
+   ```json
+   "my-video.mp4": [
+     "https://media.societyprotocol.io/my-video.mp4",
+     "https://<CID>.ipfs.storacha.link/my-video.mp4",
+     "https://<CID>.ipfs.w3s.link/my-video.mp4",
+     "https://<CID>.ipfs.nftstorage.link/my-video.mp4"
+   ]
+   ```
+
+4. **For article videos** — Set the `videoUrl` field in the MDX frontmatter to the R2 URL:
+   ```
+   videoUrl: "https://media.societyprotocol.io/my-video.mp4"
+   ```
+
+5. **Rebuild and deploy** — Push to `main` to trigger a deploy with the updated references.
+
+### Current Media Files
+
+| File                       | R2 URL                                                    | Size     |
+|----------------------------|-----------------------------------------------------------|----------|
+| `state-sphere-loop.gif`    | `https://media.societyprotocol.io/state-sphere-loop.gif`  | 5.14 MB  |
+| `narrative-video-sp.mp4`   | `https://media.societyprotocol.io/narrative-video-sp.mp4` | 245.6 MB |
+| `game-theory-video.mp4`    | `https://media.societyprotocol.io/game-theory-video.mp4`  | 90.7 MB  |
+| `rebalancing-pyramids.mp4` | `https://media.societyprotocol.io/rebalancing-pyramids.mp4` | 42.4 MB |
+| `fake-everything.mp4`      | `https://media.societyprotocol.io/fake-everything.mp4`    | 38.4 MB  |
 
 ---
 
@@ -283,7 +325,7 @@ Complete these items in order:
 - [ ] **Add `CLOUDFLAREACCOUNTID` secret** to GitHub (see Section 2 — likely missing)
 - [ ] **Verify `DNSAPITOKEN`** is valid — push a test change and check if the deploy step succeeds; if it fails with auth errors, create a new token
 - [ ] **Add custom domain `new.societyprotocol.io`** in Cloudflare Pages dashboard (see Section 4)
-- [ ] **Upload media (~4GB)** via `./scripts/upload-media.sh` (see Section 6)
+- [x] **Upload media** to Cloudflare R2 bucket `society-protocol-media` (see Section 6)
 - [ ] **Create placeholder pages via TinaCMS**: Whitepaper, Glossary, Ideology, Roadmap — currently these pages are linked in the footer/nav but have no content
 - [ ] **Wire newsletter form** — the subscribe form on the site is not connected to any backend; needs a form service or API endpoint
 - [ ] **Full end-to-end test**: create an article in TinaCMS → wait for deploy → confirm it appears on the live site

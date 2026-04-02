@@ -1,13 +1,20 @@
 {
-  "state-sphere-loop.gif": "https://bafybeiadxprlwlycwhtysfver2e475dqimydalahcv2ad6rrr5wfrj3evu.ipfs.storacha.link/state-sphere-loop.gif",
+  "state-sphere-loop.gif": [
+    "https://media.societyprotocol.io/state-sphere-loop.gif",
+    "https://bafybeiadxprlwlycwhtysfver2e475dqimydalahcv2ad6rrr5wfrj3evu.ipfs.storacha.link/state-sphere-loop.gif",
+    "https://bafybeiadxprlwlycwhtysfver2e475dqimydalahcv2ad6rrr5wfrj3evu.ipfs.w3s.link/state-sphere-loop.gif",
+    "https://bafybeiadxprlwlycwhtysfver2e475dqimydalahcv2ad6rrr5wfrj3evu.ipfs.nftstorage.link/state-sphere-loop.gif"
+  ],
   "narrative-video-sp.mp4": [
+    "https://media.societyprotocol.io/narrative-video-sp.mp4",
     "https://bafybeienku6q5xcxcaveknqt3uiqikalons64l4ybwi6ev7dnelpqpzasu.ipfs.storacha.link/narrative-video-sp.mp4",
-    "https://bafybeienku6q5xcxcaveknqt3uiqikalons64l4ybwi6ev7dnelpqpzasu.ipfs.dweb.link/narrative-video-sp.mp4",
-    "https://ipfs.io/ipfs/bafybeienku6q5xcxcaveknqt3uiqikalons64l4ybwi6ev7dnelpqpzasu/narrative-video-sp.mp4"
+    "https://bafybeienku6q5xcxcaveknqt3uiqikalons64l4ybwi6ev7dnelpqpzasu.ipfs.w3s.link/narrative-video-sp.mp4",
+    "https://bafybeienku6q5xcxcaveknqt3uiqikalons64l4ybwi6ev7dnelpqpzasu.ipfs.nftstorage.link/narrative-video-sp.mp4"
   ],
   "game-theory-video2.mp4": [
+    "https://media.societyprotocol.io/game-theory-video.mp4",
     "https://bafybeigoqfb3hcpig2hhd4vjedmzltdv7lvrsv2ctbrcaghazlfrbahrnm.ipfs.storacha.link/game-theory-video3.mp4",
-    "https://bafybeigoqfb3hcpig2hhd4vjedmzltdv7lvrsv2ctbrcaghazlfrbahrnm.ipfs.dweb.link/game-theory-video3.mp4",
-    "https://ipfs.io/ipfs/bafybeigoqfb3hcpig2hhd4vjedmzltdv7lvrsv2ctbrcaghazlfrbahrnm/game-theory-video3.mp4"
+    "https://bafybeigoqfb3hcpig2hhd4vjedmzltdv7lvrsv2ctbrcaghazlfrbahrnm.ipfs.w3s.link/game-theory-video3.mp4",
+    "https://bafybeigoqfb3hcpig2hhd4vjedmzltdv7lvrsv2ctbrcaghazlfrbahrnm.ipfs.nftstorage.link/game-theory-video3.mp4"
   ]
 }
