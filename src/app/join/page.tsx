@@ -34,10 +34,10 @@ export default function Join() {
               alt=""
               fill
               sizes="100vw"
-              className="object-fill z-20"
+              className="object-fill z-[1]"
               aria-hidden="true"
             />
-            <div className="relative z-40 flex flex-col justify-between h-full px-8 py-10">
+            <div className="relative z-[2] flex flex-col justify-between h-full px-8 py-10">
               <h3 className="font-display text-[38px] font-normal leading-[1] text-white max-w-[648px]">
                 Stay Updated
                 <br /> on Project
