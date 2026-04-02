@@ -60,6 +60,7 @@ export default function VideoPlayer({
   const [started, setStarted] = useState(false)
   const [probing, setProbing] = useState(false)
   const [srcIndex, setSrcIndex] = useState(0)
+  const probed = useRef(false)
   const sources = Array.isArray(src) ? src : [src]
 
   useEffect(() => {
@@ -117,13 +118,14 @@ export default function VideoPlayer({
   }, [started, srcIndex])
 
   function handlePlay() {
-    if (sources.length <= 1) {
+    if (sources.length <= 1 || probed.current) {
       setStarted(true)
       return
     }
     setProbing(true)
     findBestSource(sources).then((index) => {
       setSrcIndex(index)
+      probed.current = true
       setProbing(false)
       setStarted(true)
     })
