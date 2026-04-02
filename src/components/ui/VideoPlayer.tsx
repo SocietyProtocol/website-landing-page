@@ -51,30 +51,12 @@ export default function VideoPlayer({
       tryNext()
     })
 
-    let stallTimer: ReturnType<typeof setTimeout>
-
     function onError() { tryNext() }
 
-    function onStalled() {
-      // stalled fires after ~3 s of no data; give 4 s more before switching
-      stallTimer = setTimeout(() => {
-        if (video && video.readyState < HTMLMediaElement.HAVE_FUTURE_DATA) tryNext()
-      }, 4000)
-    }
-
-    function onProgress() { clearTimeout(stallTimer) }
-
     video.addEventListener('error', onError)
-    video.addEventListener('stalled', onStalled)
-    video.addEventListener('progress', onProgress)
-    video.addEventListener('playing', onProgress)
 
     return () => {
-      clearTimeout(stallTimer)
       video.removeEventListener('error', onError)
-      video.removeEventListener('stalled', onStalled)
-      video.removeEventListener('progress', onProgress)
-      video.removeEventListener('playing', onProgress)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [started, srcIndex])
