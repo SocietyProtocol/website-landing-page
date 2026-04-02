@@ -1,11 +1,11 @@
 # Society Protocol — Client Handover Guide
 
 ## Overview
-
+   
 This guide contains everything needed to operate, maintain, and migrate the Society Protocol website independently.
 
 ### What Was Built
-
+   
 The site is a fully static Next.js 15 application with:
 
 - **TinaCMS Cloud** — visual editor for non-technical content editing
@@ -88,7 +88,7 @@ Copy the `did` field — you'll need it for the next step.
 #### `W3PROOF`
 
 This is a delegation proof that authorizes the agent key to upload to your Storacha space.
-
+ 
 ```bash
 # List your spaces to find the DID
 storacha space ls
