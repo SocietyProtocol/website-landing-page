@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export interface SocialLinksProps {
   x?: string;
   farcaster?: string;
@@ -59,12 +57,39 @@ export function FarcasterIcon({ className = "w-4 h-4" }: { className?: string })
 
 export function LensIcon({ className = "w-4 h-4" }: { className?: string }) {
   return (
-    <Image
-      src="/images/vector-l49.png"
-      alt="Lens"
-      width={16}
-      height={16}
+    <svg
       className={className}
-    />
+      viewBox="0 0 52 33"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M44.675 27.2285C33.4825 34.9278 18.4757 34.9089 7.36335 27.2615C2.03378 23.5983 -2.46968 17.5512 1.53339 11.2303C4.78117 6.09903 11.593 5.08409 16.2617 9.18158C16.7338 3.78121 20.9398 0 26.005 0C31.0561 0 35.2763 3.8473 35.72 9.19102C39.8506 5.53727 45.7844 5.9102 49.4192 9.89439C52.3413 13.0997 52.7945 17.5795 50.4672 21.2758C49.0133 23.688 47.1345 25.5338 44.675 27.2237V27.2285Z" />
+    </svg>
+  );
+}
+
+export function FacebookIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+    </svg>
+  );
+}
+
+export function NostrIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 32 32"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path d="M11.68 0C5.23 0 0 5.23 0 11.68v8.64C0 26.77 5.23 32 11.68 32h8.64C26.77 32 32 26.77 32 20.32V11.68C32 5.23 26.77 0 20.32 0zm4.1 23.37l-5.06-8.59v8.59H6.37V8.63h4.35l5.06 8.59V8.63h4.35v14.74z" />
+    </svg>
   );
 }
