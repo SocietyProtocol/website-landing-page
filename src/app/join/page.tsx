@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import NewsletterForm from "@/components/ui/NewsletterForm";
 import { XIcon, FarcasterIcon } from "@/components/ui/SocialIcons";
 
@@ -194,7 +195,10 @@ export default function Join() {
           </a>
 
           {/* Join The Team Card */}
-          <div className="md:col-span-2 lg:col-span-4 lg:order-6 relative flex flex-col justify-between rounded-[38px] aspect-[4/3] sm:aspect-[1781/968]">
+          <Link
+            href="/roles"
+            className="md:col-span-2 lg:col-span-4 lg:order-6 relative flex flex-col justify-between rounded-[38px] aspect-[4/3] sm:aspect-[1781/968]"
+          >
             <Image
               src="/images/join-the-team-bg.png"
               alt=""
@@ -220,7 +224,7 @@ export default function Join() {
                 </p>
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Follow Us */}
           <div className="md:col-span-2 lg:col-span-2 lg:order-7 flex flex-col">

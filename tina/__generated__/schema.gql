@@ -108,7 +108,7 @@ union DocumentNode = Posts | Roles | Roadmap | Whitepaper | Glossary | Ideology 
 type Posts implements Node & Document {
   title: String!
   slug: String!
-  description: String!
+  description: String
   date: String
   author: String
   image: String

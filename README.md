@@ -7,7 +7,7 @@ A fully static, decentralized website for Society Protocol — built with Next.j
 - **Framework**: Next.js 15 (App Router, `output: "export"`)
 - **Content**: MDX files managed via TinaCMS
 - **Styling**: Tailwind CSS 4 + `@tailwindcss/typography`
-- **Hosting**: IPFS via Storacha (web3.storage) + Filecoin persistence
+- **Hosting**: IPFS via Filebase
 - **Addressing**: IPNS (mutable decentralized) + DNSLink (human-readable domain)
 - **CI/CD**: GitHub Actions — build, upload, publish
 
@@ -58,8 +58,8 @@ Three access methods are available:
 
 | Method | URL | Properties |
 |--------|-----|------------|
-| Direct CID | `https://<cid>.ipfs.w3s.link` | Immutable, permanent |
-| IPNS | `https://<ipns-key>.ipns.w3s.link` | Mutable, decentralized |
+| Direct CID | `https://ipfs.filebase.io/ipfs/<cid>` | Immutable, permanent |
+| IPNS | `https://ipfs.io/ipns/<ipns-key>` | Mutable, decentralized |
 | Domain | `https://societyprotocol.org` | Human-readable, DNSLink |
 
 See [`docs/DEPLOYMENT_GUIDE.md`](docs/DEPLOYMENT_GUIDE.md) for full setup instructions.

@@ -4,7 +4,10 @@ import Footer from "@/components/layout/Footer";
 import { PostHogProvider } from "@/components/PostHogProvider";
 import "@/styles/globals.css";
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://societyprotocol.io";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Society Protocol",
     template: "%s | Society Protocol",

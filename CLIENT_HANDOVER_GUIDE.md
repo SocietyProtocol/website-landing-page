@@ -9,12 +9,12 @@ This guide contains everything needed to operate, maintain, and migrate the Soci
 The site is a fully static Next.js 15 application with:
 
 - **TinaCMS Cloud** — visual editor for non-technical content editing
-- **Storacha** — permanent IPFS + Filecoin storage (every deploy is archived)
+- **Filebase** — IPFS pinning storage (every deploy is archived)
 - **Cloudflare Pages** — fast global serving via CDN
 - **Cloudflare R2** — media file hosting via `media.societyprotocol.io` (IPFS as fallback)
 - **GitHub Actions** — automated CI/CD pipeline (self-hosted runner)
 
-Every push to the `main` branch automatically builds the site, uploads it to IPFS via Storacha, and deploys it to Cloudflare Pages. No manual deploys are needed.
+Every push to the `main` branch automatically builds the site, uploads it to IPFS via Filebase, and deploys it to Cloudflare Pages. No manual deploys are needed.
 
 ### Architecture
 
@@ -29,7 +29,7 @@ Content editor
             ▼
         GitHub Actions (self-hosted runner)
             ├─► npm run build  →  out/  (static HTML/CSS/JS)
-            ├─► Storacha upload  →  IPFS CID (permanent archive)
+            ├─► Filebase upload  →  IPFS CID (permanent archive)
             └─► Cloudflare Pages deploy  →  live site
 ```
 
@@ -40,7 +40,7 @@ Content editor
 | `https://new.societyprotocol.io`       | Live site (current, before domain cutover) |
 | `https://new.societyprotocol.io/admin` | TinaCMS editor                             |
 | `https://media.societyprotocol.io`     | Media files (R2 CDN)                       |
-| `https://storacha.link/ipfs/<CID>`     | Permanent IPFS archive of each deploy      |
+| `https://ipfs.filebase.io/ipfs/<CID>`  | Permanent IPFS archive of each deploy      |
 
 ---
 
@@ -52,7 +52,7 @@ You need owner or admin access to the following:
 |---------------|---------------------|-------------------------------------|
 | GitHub        | github.com          | Source code, Actions CI/CD, Secrets |
 | TinaCMS Cloud | app.tina.io         | Visual content editor               |
-| Storacha      | storacha.network    | IPFS/Filecoin storage               |
+| Filebase      | filebase.io         | IPFS pinning storage                |
 | Cloudflare    | dash.cloudflare.com | DNS, Pages hosting                  |
 
 ---
@@ -70,42 +70,24 @@ All secrets live in the GitHub repository under **Settings → Secrets and varia
 3. Copy **Client ID** → set as `TINACLIENTID`
 4. Generate a **Read-only Token** → set as `TINATOKEN`
 
-#### `STORACHAPRINCIPAL`
+#### `FILEBASEKEY` and `FILEBASESECRET`
 
-This is the Storacha agent key used by CI to authenticate uploads.
+These are S3-compatible access credentials for Filebase.
 
-```bash
-# Install Storacha CLI
-npm install -g @storacha/cli
+1. Log in to [filebase.com](https://filebase.com)
+2. Go to **Access Keys** in the left sidebar
+3. Click **Create Access Key**
+4. Copy the **Access Key** → set as `FILEBASEKEY`
+5. Copy the **Secret Key** → set as `FILEBASESECRET`
 
-# Create a new agent key (outputs JSON with did and key)
-storacha key create --json
-```
+#### `FILEBASEBUCKET`
 
-Copy the `key` field from the output → set as `STORACHAPRINCIPAL`.
-Copy the `did` field — you'll need it for the next step.
+This is the name of the IPFS-enabled bucket where site deploys are stored.
 
-#### `W3PROOF`
-
-This is a delegation proof that authorizes the agent key to upload to your Storacha space.
- 
-```bash
-# List your spaces to find the DID
-storacha space ls
-
-# Select the space you want to use
-storacha space use <space-did>
-
-# Create a delegation proof for the agent DID from the previous step
-storacha delegation create <agent-did> \
-  -c space/blob/add \
-  -c space/index/add \
-  -c filecoin/offer \
-  -c upload/add \
-  --base64
-```
-
-The output (a long base64 string) → set as `W3PROOF`.
+1. In the Filebase dashboard → **Buckets** → **Create Bucket**
+2. Enter a bucket name (e.g. `society-protocol-deploys`)
+3. **Important:** Select **IPFS** as the network type (not standard S3)
+4. Set the bucket name → set as `FILEBASEBUCKET`
 
 #### `DNSAPITOKEN`
 
@@ -132,8 +114,9 @@ This is a Cloudflare API token used to deploy to Cloudflare Pages and manage DNS
 |-----------------------|-------------------------|--------------------------------|
 | `TINACLIENTID`        | Likely set              | TinaCMS Cloud project settings |
 | `TINATOKEN`           | Likely set              | TinaCMS Cloud project settings |
-| `STORACHAPRINCIPAL`   | Likely set              | `storacha key create --json`   |
-| `W3PROOF`             | Likely set              | `storacha delegation create`   |
+| `FILEBASEKEY`         | Add                     | Filebase dashboard → Access Keys |
+| `FILEBASESECRET`      | Add                     | Filebase dashboard → Access Keys |
+| `FILEBASEBUCKET`      | Add                     | Filebase dashboard → Buckets   |
 | `DNSAPITOKEN`         | Needs verification      | Cloudflare API token           |
 | `CLOUDFLAREACCOUNTID` | Likely missing — add it | Cloudflare dashboard sidebar   |
 
@@ -141,6 +124,8 @@ This is a Cloudflare API token used to deploy to Cloudflare Pages and manage DNS
 
 These are no longer used and can be safely deleted from GitHub Secrets:
 
+- `STORACHAPRINCIPAL`
+- `W3PROOF`
 - `DNSRECORDID`
 - `WEBHOSTNAMEID`
 - `W3PRINCIPAL`
@@ -249,7 +234,7 @@ Once `societyprotocol.io` is confirmed live on the new deployment:
 
 ## 6. Media Storage (Cloudflare R2 + IPFS Fallback)
 
-Media files (videos, GIFs) are served from **Cloudflare R2** via the custom domain `media.societyprotocol.io`. IPFS (Storacha) URLs are kept as fallback sources in case R2 is unavailable.
+Media files (videos, GIFs) are served from **Cloudflare R2** via the custom domain `media.societyprotocol.io`. IPFS (Filebase) URLs are kept as fallback sources in case R2 is unavailable.
 
 ### How It Works
 
@@ -272,21 +257,27 @@ To add a new media file:
 
 1. **Upload to R2** — In Cloudflare dashboard → R2 → `society-protocol-media` → Objects → Upload (or via CLI: `npx wrangler r2 object put society-protocol-media/<filename> --file <local-path>`)
 
-2. **Upload to Storacha** (for IPFS fallback):
+2. **Upload to Filebase** (for IPFS fallback):
+
+   In the Filebase dashboard → **Buckets** → open your IPFS bucket → **Upload** → select the file.
+   Once uploaded, click the file to view its **IPFS CID** in the object details.
+
+   Alternatively via AWS CLI (configured for Filebase):
    ```bash
-   npm install -g @storacha/cli
-   storacha space use did:key:z6Mkh1ZtfkZwfnNzHyqaWbHmHfsoRRYXNu1EiuNhWawAatme
-   storacha up <file> --json
-   # Returns: {"root":{"/":"<CID>"}}
+   aws s3 cp <file> s3://<FILEBASEBUCKET>/<filename> \
+     --endpoint-url https://s3.filebase.com
+   # Then retrieve the CID:
+   aws s3api head-object --bucket <FILEBASEBUCKET> --key <filename> \
+     --endpoint-url https://s3.filebase.com \
+     --query 'Metadata.cid' --output text
    ```
 
 3. **Update `src/data/media-cids.json`** — Add an entry with R2 URL first, then IPFS gateway URLs:
    ```json
    "my-video.mp4": [
      "https://media.societyprotocol.io/my-video.mp4",
-     "https://<CID>.ipfs.storacha.link/my-video.mp4",
-     "https://<CID>.ipfs.w3s.link/my-video.mp4",
-     "https://<CID>.ipfs.nftstorage.link/my-video.mp4"
+     "https://ipfs.filebase.io/ipfs/<CID>/my-video.mp4",
+     "https://ipfs.io/ipfs/<CID>/my-video.mp4"
    ]
    ```
 

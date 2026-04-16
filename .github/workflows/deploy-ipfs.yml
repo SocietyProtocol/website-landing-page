@@ -22,18 +22,40 @@ jobs:
           TINA_CLIENT_ID: ${{ secrets.TINACLIENTID }}
           TINA_TOKEN: ${{ secrets.TINATOKEN }}
 
-      - name: Clear storacha CLI cache
-        run: rm -rf ~/.config/storacha-cli
+      - name: Pack site into CAR file
+        run: npx --yes ipfs-car pack out/ --output site.car
 
-      - name: Upload to Storacha (IPFS + Filecoin)
-        uses: storacha/add-to-web3@v4
+      - name: Upload CAR to Filebase (IPFS pinning)
         id: upload
         env:
-          STORACHA_STORE_NAME: storacha-deploy-${{ github.run_id }}
-        with:
-          path_to_add: 'out'
-          secret_key: ${{ secrets.STORACHAPRINCIPAL }}
-          proof: ${{ secrets.W3PROOF }}
+          FILEBASEKEY: ${{ secrets.FILEBASEKEY }}
+          FILEBASESECRET: ${{ secrets.FILEBASESECRET }}
+          FILEBASEBUCKET: ${{ secrets.FILEBASEBUCKET }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          npm install --no-save @aws-sdk/client-s3
+          node <<'EOF'
+          const { S3Client, PutObjectCommand, HeadObjectCommand } = require("@aws-sdk/client-s3");
+          const fs = require("fs");
+          (async () => {
+            const s3 = new S3Client({
+              endpoint: "https://s3.filebase.com",
+              region: "us-east-1",
+              credentials: {
+                accessKeyId: process.env.FILEBASEKEY,
+                secretAccessKey: process.env.FILEBASESECRET,
+              },
+            });
+            const Bucket = process.env.FILEBASEBUCKET;
+            const Key = `deploy-${process.env.RUN_ID}.car`;
+            await s3.send(new PutObjectCommand({ Bucket, Key, Body: fs.readFileSync("site.car") }));
+            const head = await s3.send(new HeadObjectCommand({ Bucket, Key }));
+            const cid = head.Metadata && head.Metadata.cid;
+            if (!cid) throw new Error("No CID returned in object metadata");
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `cid=${cid}\n`);
+            console.log(`CID: ${cid}`);
+          })().catch(e => { console.error(e); process.exit(1); });
+          EOF
 
       - name: Create Cloudflare Pages project
         continue-on-error: true
@@ -55,5 +77,5 @@ jobs:
         run: |
           echo "## Deployment Complete"
           echo "CID: ${{ steps.upload.outputs.cid }}"
-          echo "IPFS: https://storacha.link/ipfs/${{ steps.upload.outputs.cid }}"
+          echo "IPFS: https://ipfs.filebase.io/ipfs/${{ steps.upload.outputs.cid }}"
           echo "Site: https://new.societyprotocol.io"

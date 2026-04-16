@@ -31,7 +31,7 @@ export default function SidebarNav({ headings }: { headings: Heading[] }) {
 
   if (headings.length === 0) {
     return (
-      <span className="font-heading text-[16px] text-[#4f4f4f]">
+      <span className="font-body text-[16px] text-[#4f4f4f]">
         No sections yet
       </span>
     );
@@ -75,7 +75,7 @@ export default function SidebarNav({ headings }: { headings: Heading[] }) {
           <a
             key={h.id}
             href={`#${h.id}`}
-            className={`font-heading ${fontSize} leading-[100%] transition-colors grid grid-cols-[8px_1fr] gap-2 items-start ${
+            className={`font-body ${fontSize} leading-[100%] transition-colors grid grid-cols-[8px_1fr] gap-2 items-start ${
               isActive
                 ? "text-[#FDFDFD] font-normal"
                 : "text-[#dadada] hover:text-[#FDFDFD]"

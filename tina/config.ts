@@ -1,9 +1,11 @@
 import { defineConfig } from "tinacms";
 
+const env = (typeof process !== "undefined" && process.env) || ({} as Record<string, string | undefined>);
+
 export default defineConfig({
-  branch: process.env.TINA_BRANCH || "main",
-  clientId: process.env.TINA_CLIENT_ID || "",
-  token: process.env.TINA_TOKEN || "",
+  branch: env.TINA_BRANCH || "main",
+  clientId: env.TINA_CLIENT_ID || "",
+  token: env.TINA_TOKEN || "",
   build: {
     outputFolder: "admin",
     publicFolder: "public",
@@ -39,7 +41,6 @@ export default defineConfig({
             name: "description",
             label: "Description",
             type: "string",
-            required: true,
           },
           {
             name: "date",

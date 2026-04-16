@@ -38,6 +38,25 @@ export function makeMdxComponents(headings: Heading[]) {
     h1: (props: React.ComponentProps<"h1">) => <h1 id={getId()} {...props} />,
     h2: (props: React.ComponentProps<"h2">) => <h2 id={getId()} {...props} />,
     h3: (props: React.ComponentProps<"h3">) => <h3 id={getId()} {...props} />,
+    img: ({ alt, src, style: imgStyle, ...rest }: React.ComponentProps<"img">) => {
+      const numericWidth = alt && /^\d+$/.test(alt.trim())
+        ? parseInt(alt.trim(), 10)
+        : null;
+      return (
+        <span style={{ display: "flex", justifyContent: "center" }}>
+          <img
+            src={src}
+            alt={numericWidth ? "" : (alt ?? "")}
+            {...(numericWidth ? { width: numericWidth } : {})}
+            {...rest}
+            style={{
+              maxWidth: numericWidth ? `${numericWidth}px` : "100%",
+              ...imgStyle,
+            }}
+          />
+        </span>
+      );
+    },
     SideQuote,
   };
 }

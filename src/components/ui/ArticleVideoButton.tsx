@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import VideoPlayer from "@/components/ui/VideoPlayer";
-import { ipfsWithFallbacks } from "@/lib/ipfs";
+import { videoSources } from "@/lib/ipfs";
 
 const PlayIcon = () => (
   <svg width="10" height="12" viewBox="0 0 13 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,7 +57,7 @@ export default function ArticleVideoButton({
           >
             <div className="relative rounded-[38px] overflow-hidden border border-[#656464] aspect-[897/484]">
               <VideoPlayer
-                src={ipfsWithFallbacks(videoUrl)}
+                src={videoSources(videoUrl)}
                 poster={poster}
                 title={title}
                 label=""

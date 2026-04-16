@@ -1,9 +1,10 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
+var env = typeof process !== "undefined" && process.env || {};
 var config_default = defineConfig({
-  branch: process.env.TINA_BRANCH || "main",
-  clientId: process.env.TINA_CLIENT_ID || "",
-  token: process.env.TINA_TOKEN || "",
+  branch: env.TINA_BRANCH || "main",
+  clientId: env.TINA_CLIENT_ID || "",
+  token: env.TINA_TOKEN || "",
   build: {
     outputFolder: "admin",
     publicFolder: "public"
@@ -38,8 +39,7 @@ var config_default = defineConfig({
           {
             name: "description",
             label: "Description",
-            type: "string",
-            required: true
+            type: "string"
           },
           {
             name: "date",
