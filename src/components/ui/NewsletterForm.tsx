@@ -24,7 +24,7 @@ export default function NewsletterForm({
         ? "flex items-center border-b border-white pb-2"
         : "flex items-center border border-border-default rounded-full px-6 py-3";
 
-  const textSize = isCompact ? "text-[16px]" : "text-[25px]";
+  const textSize = isCompact ? "text-[16px]" : variant === "underline" ? "text-[16px] lg:text-[25px]" : "text-[25px]";
 
   return (
     <div>
@@ -40,7 +40,7 @@ export default function NewsletterForm({
           className={`bg-transparent font-display ${textSize} text-white placeholder:text-white flex-1 min-w-0 outline-none`}
           required
         />
-        <span className={`text-white mx-${isCompact ? "2" : "3"} font-display ${textSize}`}>|</span>
+        <span className={`text-white ${isCompact || variant === "underline" ? "mx-2" : "mx-3"} font-display ${textSize}`}>|</span>
         <button
           type="submit"
           disabled={status === "loading" || !isValidEmail}

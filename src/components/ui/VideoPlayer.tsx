@@ -84,15 +84,15 @@ export default function VideoPlayer({
           {hasOverlayText ? (
             <>
               <div className="absolute inset-0 bg-gradient-to-b from-[rgba(58,58,58,0.71)] to-[rgba(0,0,0,0.71)]" />
-              {label && <span className="absolute top-8 left-8 font-mono text-[20px] text-white">{label}</span>}
-              <div className="absolute bottom-8 left-8 right-8">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-[50px] h-[50px] rounded-full bg-white flex items-center justify-center shrink-0">
+              {label && <span className="absolute top-4 left-4 md:top-8 md:left-8 font-mono text-[13px] md:text-[20px] text-white">{label}</span>}
+              <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 md:right-8">
+                <div className="flex items-center gap-2 md:gap-4 mb-2 md:mb-4">
+                  <div className="w-[32px] h-[32px] md:w-[50px] md:h-[50px] rounded-full bg-white flex items-center justify-center shrink-0">
                     <PlayIcon />
                   </div>
-                  <span className="font-body text-[24px] text-[#B8B8B8]">Watch Video</span>
+                  <span className="font-body text-[16px] md:text-[24px] text-[#B8B8B8]">Watch Video</span>
                 </div>
-                {title && <h3 className="font-display text-[28px] md:text-[34px] font-normal leading-[1]">{title}</h3>}
+                {title && <h3 className="font-display text-[18px] md:text-[28px] lg:text-[34px] font-normal leading-[1]">{title}</h3>}
               </div>
             </>
           ) : (

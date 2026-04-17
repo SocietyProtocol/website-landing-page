@@ -50,7 +50,7 @@ export function makeMdxComponents(headings: Heading[]) {
             {...(numericWidth ? { width: numericWidth } : {})}
             {...rest}
             style={{
-              maxWidth: numericWidth ? `${numericWidth}px` : "100%",
+              maxWidth: numericWidth ? `min(${numericWidth}px, 100%)` : "100%",
               ...imgStyle,
             }}
           />

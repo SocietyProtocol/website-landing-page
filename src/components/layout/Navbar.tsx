@@ -19,7 +19,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 font-display text-[21.283px] tracking-[0.002em] text-white bg-[#131313] border border-[#656565] rounded-[111px] pr-4 pl-1 h-[42px]"
+          className="flex items-center gap-2 font-display text-[14px] min-[400px]:text-[21.283px] tracking-[0.002em] text-white bg-[#131313] border border-[#656565] rounded-[111px] pr-4 pl-1 h-[42px] whitespace-nowrap"
         >
           <Image
             src="/vector-home-page.png"

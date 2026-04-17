@@ -79,10 +79,11 @@ export default function FloatingIndex({ headings }: { headings: Heading[] }) {
       {open ? (
         <div
           onClick={handleNavClick}
-          className="bg-[#10141A] border border-[#505050] border-t-0 rounded-b-[40px] pl-6 max-h-[70vh] overflow-y-auto floating-index-scroll w-full"
+          className="bg-[#10141A] border border-[#505050] border-t-0 rounded-b-[40px] pl-6 pb-4 pr-[5px] w-full"
         >
-          <SidebarNav headings={headings} />
-          <div className="h-10" />
+          <div className="max-h-[55vh] overflow-y-auto floating-index-scroll pr-2">
+            <SidebarNav headings={headings} />
+          </div>
         </div>
       ) : (
         <div

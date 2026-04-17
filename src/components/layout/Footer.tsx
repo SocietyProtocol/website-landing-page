@@ -36,7 +36,7 @@ export default function Footer() {
           ))}
 
           {/* Stay Updated */}
-          <div className="max-w-[300px] lg:max-w-none">
+          <div>
             <h4 className="font-display text-[25px] text-text-muted mb-8">
               STAY UPDATED
             </h4>

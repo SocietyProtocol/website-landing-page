@@ -5,7 +5,7 @@ import { extractHeadings } from "@/lib/mdx-components";
 import MdxArticleLayout from "@/components/layout/MdxArticleLayout";
 import ArticleVideoButton from "@/components/ui/ArticleVideoButton";
 import ShuffledArticles from "@/components/ui/ShuffledArticles";
-import { XIcon, FacebookIcon, NostrIcon, FarcasterIcon, LensIcon } from "@/components/ui/SocialIcons";
+import { XIcon, FacebookIcon, NostrIcon, FarcasterIcon } from "@/components/ui/SocialIcons";
 
 export const dynamicParams = false;
 
@@ -69,7 +69,7 @@ export default async function ArticlePage({
     <div className="min-h-screen bg-repeat-y bg-top bg-[length:100%_auto]" style={{ backgroundImage: "url(/images/group-131-bg.png)" }}>
       {/* 1. Hero */}
       <section className="max-w-[1600px] mx-auto px-8 pt-36 pb-12">
-        <div className="flex items-center justify-between mb-10">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-10">
           <span className="font-body text-[18px] tracking-widest text-[#7A7A7A]">
             / Published - {frontmatter.date ? new Date(frontmatter.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : ""} &nbsp; Written by: {frontmatter.author || "Anton"}
           </span>
@@ -90,9 +90,6 @@ export default async function ArticlePage({
             </a>
             <a href={`https://warpcast.com/~/compose?text=${encodedTitle}&embeds[]=${encodedUrl}`} target="_blank" rel="noopener noreferrer" aria-label="Share on Farcaster" className="hover:text-white transition-colors">
               <FarcasterIcon className="w-[18px] h-[18px]" />
-            </a>
-            <a href={`https://lens.xyz/?url=${encodedUrl}&text=${encodedTitle}`} target="_blank" rel="noopener noreferrer" aria-label="Share on Lens" className="hover:text-white transition-colors">
-              <LensIcon className="w-[18px] h-[18px]" />
             </a>
           </div>
         </div>
