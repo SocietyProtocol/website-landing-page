@@ -21,8 +21,8 @@ jobs:
         env:
           TINA_CLIENT_ID: ${{ secrets.TINACLIENTID }}
           TINA_TOKEN: ${{ secrets.TINATOKEN }}
-          NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN: ${{ secrets.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN }}
-          NEXT_PUBLIC_POSTHOG_HOST: ${{ secrets.NEXT_PUBLIC_POSTHOG_HOST }}
+          NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN: ${{ vars.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN }}
+          NEXT_PUBLIC_POSTHOG_HOST: ${{ vars.NEXT_PUBLIC_POSTHOG_HOST }}
 
       - name: Pack site into CAR file
         run: npx --yes ipfs-car pack out/ --output site.car
