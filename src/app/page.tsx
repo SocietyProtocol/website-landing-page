@@ -210,12 +210,12 @@ export default function Home() {
               Claim your role in the founding fabric of Society Protocol.
             </p>
               <p className="font-body text-[20px] text-white leading-[1] mb-8">
-              By contributing to the movement, you receive a representation of your contribution in our Energy Map.
+              By contributing to the movement, you receive a representation of your contribution.
             </p>
 <p className="font-body text-[20px] text-white leading-[1] mb-8">
               Receive early access, help shape the architecture, contribute to the community, and help us pioneer the transition of humanity from Nation States to Synchronized States.
             </p>
-            <Button href="https://staging-society-protocol-client.vercel.app/spec-token">INVEST IN SOCIETY PROTOCOL</Button>
+            <Button href="https://app.societyprotocol.io/spec-token">INVEST IN SOCIETY PROTOCOL</Button>
           </div>
         </div>
       </section>

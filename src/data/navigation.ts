@@ -9,7 +9,7 @@ export const footerColumns = [
   {
     title: "SITE MAP",
     links: [
-      { label: "APP", href: "https://staging-society-protocol-client.vercel.app" },
+      { label: "APP", href: "https://app.societyprotocol.io/" },
       { label: "LEARN", href: "/learn" },
       { label: "ABOUT", href: "/about" },
       { label: "COMMUNITY", href: "/join" },

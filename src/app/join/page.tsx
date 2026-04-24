@@ -142,7 +142,7 @@ export default function Join() {
 
           {/* VIP Community Card */}
           <a
-            href="https://staging-society-protocol-client.vercel.app/profile"
+            href="https://app.societyprotocol.io/profile/lock-spec"
             className="group relative flex flex-col justify-end bg-[length:100%_100%] bg-center bg-no-repeat aspect-[870/968] lg:col-span-2 lg:order-4"
             style={{ backgroundImage: "url(/images/join-the-vip-bg.png)" }}
           >

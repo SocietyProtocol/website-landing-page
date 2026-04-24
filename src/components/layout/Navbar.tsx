@@ -50,14 +50,14 @@ export default function Navbar() {
         {/* Right side */}
         <div className="flex items-center gap-5">
           <a
-            href="https://staging-society-protocol-client.vercel.app"
+            href="https://app.societyprotocol.io"
             className="hidden lg:flex items-center gap-8 font-mono text-xs text-[#808080] bg-[#131313] rounded-[111px] border border-[#808080] pl-4 pr-10 h-[42px] hover:text-white hover:border-white/60 transition-colors"
           >
             <span className="w-[7px] h-[7px] rounded-full bg-[#0AB6D4]" />
             GO TO APP
           </a>
           <a
-            href="https://staging-society-protocol-client.vercel.app/auction"
+            href="https://app.societyprotocol.io/auction"
             className="hidden lg:flex font-mono text-[16px] tracking-[0.03em] bg-white text-black rounded-[38px] px-6 h-[42px] hover:bg-white/90 transition-colors items-center gap-2"
           >
             INVEST IN THE ICO
@@ -112,7 +112,7 @@ export default function Navbar() {
           ))}
 
           <a
-            href="https://staging-society-protocol-client.vercel.app"
+            href="https://app.societyprotocol.io/"
             onClick={closeMenu}
             className="flex items-center gap-8 font-mono text-sm text-[#808080] bg-[#131313] rounded-[111px] border border-[#808080] pl-4 pr-10 h-[42px] hover:text-white hover:border-white/60 transition-colors"
           >
@@ -121,7 +121,7 @@ export default function Navbar() {
           </a>
 
           <a
-            href="https://staging-society-protocol-client.vercel.app/auction"
+            href="https://app.societyprotocol.io/auction"
             onClick={closeMenu}
             className="font-mono text-[16px] tracking-[0.03em] bg-white text-black rounded-[38px] px-6 h-[42px] hover:bg-white/90 transition-colors flex items-center gap-2"
           >
