@@ -4,7 +4,7 @@
    
 This guide contains everything needed to operate, maintain, and migrate the Society Protocol website independently.
 
-### What Was Built
+### What Was Built 
    
 The site is a fully static Next.js 15 application with:
 
