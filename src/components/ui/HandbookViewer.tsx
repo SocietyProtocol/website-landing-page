@@ -116,7 +116,7 @@ export default function HandbookViewer({ svgPath }: HandbookViewerProps) {
       </div>
       <div className="mt-4 flex flex-col items-center gap-3">
         <p className="text-sm text-neutral-400">
-          Click and hold to pan. SHIFT + wheel to zoom. ESC to reset.
+          Click and hold to pan. Double click to zoom. ESC to reset.
         </p>
         <button
           onClick={handleReset}

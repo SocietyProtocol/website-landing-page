@@ -44,7 +44,7 @@ export default function MobileTocDrawer({ headings }: { headings: Heading[] }) {
 
       {/* Full-width dropdown panel */}
       {open && (
-        <div className="fixed top-[126px] left-0 right-0 z-40 px-4 md:hidden" ref={panelRef}>
+        <div className="fixed top-[126px] left-0 right-0 z-40 px-4 lg:hidden" ref={panelRef}>
           <div className="bg-[#10141A] border border-[#505050] rounded-[20px] pl-4 pr-0 pt-6 pb-2">
             <p className="font-body text-[13px] tracking-widest text-[#7A7A7A] mb-4">INDEX</p>
             <div
