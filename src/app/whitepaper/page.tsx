@@ -13,7 +13,7 @@ export default function WhitepaperPage() {
   const headings = extractHeadings(content);
 
   return (
-    <div className="min-h-screen bg-repeat-y bg-top bg-[length:100%_auto]" style={{ backgroundImage: "url(/images/group-131-bg.png)" }}>
+    <div className="min-h-screen bg-repeat-y bg-top bg-[length:100%_auto] bg-[var(--color-background-focus)]">
       {/* Hero */}
       <section className="max-w-[1400px] mx-auto px-8 pt-36 pb-12">
         <span className="font-mono text-[18px] tracking-widest text-[#7A7A7A] mb-10 block">

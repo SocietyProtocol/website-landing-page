@@ -69,6 +69,8 @@
   --color-accent-cyan: #0ab6d4;
   --color-border-default: #656464;
 
+  --color-background-focus: #10131F;
+
   /* Fonts */
   --font-heading: var(--font-space-grotesk), "Space Grotesk", sans-serif;
   --font-body: var(--font-inter), "Inter", sans-serif;

@@ -20,7 +20,7 @@ export default function Roles() {
             <h1 className="font-display text-5xl md:text-[66px] font-normal leading-[1]">
               Roles
             </h1>
-            <p className="font-body text-[20px] text-[#7A7A7A] leading-[119%] max-w-2xl mt-6">
+            <p className="font-body text-[20px] text-[var(--color-text-light)] leading-[119%] max-w-2xl mt-6">
               We are seeking <em className="text-white not-italic">mission-aligned</em> contributors
               for some early roles to help us bring Society Protocol to life.
               Reach out at{" "}
@@ -47,7 +47,7 @@ export default function Roles() {
                 >
                   <div className="flex items-center gap-3 mb-2">
                     {role.emoji && <span className="text-3xl">{role.emoji}</span>}
-                    <span className="inline-block rounded-full bg-[#1a1f2e] border border-[#6B6B6B] px-4 py-1 font-mono text-[14px] text-[#ADADAD]">
+                    <span className="inline-block rounded-full bg-[#1a1f2e] border border-[#6B6B6B] px-4 py-1 font-mono text-[14px] text-[var(--color-accent-cyan)]">
                       {role.commitment}
                     </span>
                   </div>
@@ -56,19 +56,19 @@ export default function Roles() {
                   </h3>
 
                   <div className="mb-6">
-                    <h4 className="font-mono text-[14px] tracking-widest text-[#7A7A7A] mb-3">
+                    <h4 className="font-mono text-[14px] tracking-widest text-[var(--color-accent-cyan)] mb-3">
                       RESPONSIBILITIES
                     </h4>
-                    <div className="font-body text-[18px] text-[#ADADAD] leading-[160%] whitespace-pre-line">
+                    <div className="font-body text-[18px] text-[var(--color-text-slate)] leading-[160%] whitespace-pre-line">
                       {role.responsibilities}
                     </div>
                   </div>
 
                   <div>
-                    <h4 className="font-mono text-[14px] tracking-widest text-[#7A7A7A] mb-3">
+                    <h4 className="font-mono text-[14px] tracking-widest text-[var(--color-accent-cyan)] mb-3">
                       REQUIREMENTS
                     </h4>
-                    <div className="font-body text-[18px] text-[#ADADAD] leading-[160%] whitespace-pre-line">
+                    <div className="font-body text-[18px] text-[var(--color-text-slate)] leading-[160%] whitespace-pre-line">
                       {role.requirements}
                     </div>
                   </div>

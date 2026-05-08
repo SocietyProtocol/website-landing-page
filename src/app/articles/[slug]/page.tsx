@@ -66,7 +66,7 @@ export default async function ArticlePage({
   const encodedTitle = encodeURIComponent(frontmatter.title);
 
   return (
-    <div className="min-h-screen bg-repeat-y bg-top bg-[length:100%_auto]" style={{ backgroundImage: "url(/images/group-131-bg.png)" }}>
+    <div className="min-h-screen bg-repeat-y bg-top bg-[length:100%_auto] bg-[var(--color-background-focus)]">
       {/* 1. Hero */}
       <section className="max-w-[1600px] mx-auto px-8 pt-36 pb-12">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-10">
