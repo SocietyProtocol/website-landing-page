@@ -85,6 +85,15 @@ body {
   min-height: 100vh;
 }
 
+blockquote {
+  font-weight:400;
+  border-inline-start-color: var(--color-text-slate);
+}
+
+.prose {
+  font-weight: 300;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
