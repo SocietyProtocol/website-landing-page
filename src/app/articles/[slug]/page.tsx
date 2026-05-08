@@ -70,7 +70,7 @@ export default async function ArticlePage({
       {/* 1. Hero */}
       <section className="max-w-[1600px] mx-auto px-8 pt-36 pb-12">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-10">
-          <span className="font-body text-[18px] tracking-widest text-[#7A7A7A]">
+          <span className="font-body text-[20px] tracking-widest text-[var(--color-text-light)]">
             / Published - {frontmatter.date ? new Date(frontmatter.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : ""} &nbsp; Written by: {frontmatter.author || "Anton"}
           </span>
           <div className="flex items-center gap-3 text-[#7A7A7A]">
@@ -93,7 +93,7 @@ export default async function ArticlePage({
             </a>
           </div>
         </div>
-        <h1 className="font-body text-3xl md:text-[66px] font-normal leading-[1] max-w-3xl">
+        <h1 className="font-display text-3xl md:text-[50px] font-normal leading-[1] max-w-5xl">
           {frontmatter.title}
         </h1>
       </section>

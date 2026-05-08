@@ -19,10 +19,10 @@ export default function WhitepaperPage() {
         <span className="font-mono text-[18px] tracking-widest text-[#7A7A7A] mb-10 block">
           / Reference
         </span>
-        <h1 className="font-display text-5xl md:text-[66px] font-normal leading-[1]">
+        <h1 className="font-display text-5xl md:text-[50px] font-normal leading-[1]">
           Whitepaper
         </h1>
-        <p className="font-body text-[20px] text-[#7A7A7A] leading-[119%] max-w-2xl mt-6">
+        <p className="font-body text-[20px] text-[var(--color-text-light)] leading-[119%] max-w-5xl mt-6">
           Society Protocol Whitepaper
         </p>
       </section>

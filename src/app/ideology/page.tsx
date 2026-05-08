@@ -22,7 +22,7 @@ export default function IdeologyPage() {
         <h1 className="font-display text-5xl md:text-[66px] font-normal leading-[1]">
           Ideology
         </h1>
-        <p className="font-body text-[20px] text-[#7A7A7A] leading-[119%] max-w-2xl mt-6">
+        <p className="font-body text-[20px] text-[var(--color-text-light)] leading-[119%] max-w-2xl mt-6">
           The ideological foundations of Society Protocol — why we gather and what we believe.
         </p>
       </section>
