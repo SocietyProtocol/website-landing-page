@@ -239,7 +239,7 @@ export default function Home() {
             <h2 className="font-display text-3xl md:text-[53px] font-normal leading-[0.7]">
               Meet our Community
             </h2>
-            <p className="font-body text-[21px] text-[#C3C3C3] lg:text-right max-w-[354px]">
+            <p className="font-body text-[21px] text-[var(--color-text-light)] lg:text-right max-w-[354px]">
               A global network creating the next era of decentralized society.
             </p>
           </div>
@@ -272,7 +272,7 @@ export default function Home() {
                   <h3 className="font-display text-[30px] font-normal leading-[1] mb-3">
                     {card.title}
                   </h3>
-                  <p className="font-body text-[20px] text-[#BFBCBC] leading-[117%]">
+                  <p className="font-body text-[20px] text-[var(--color-text-light)] leading-[117%]">
                     {card.description}
                   </p>
                 </div>
@@ -320,7 +320,7 @@ const communityCards = [
   {
     title: "Explore the Forum",
     description:
-      "A living archive of community-built Society Protocol.",
+      "A living archive of the Society Protocol movement.",
     icon: "/images/community-icon-forum.png",
     image: "/images/community-sun.png",
     imageHeight: 290,
@@ -329,7 +329,7 @@ const communityCards = [
   {
     title: "Explore the Codebase",
     description:
-      "Journey into our community's open-source repos.",
+      "Discover our community's public repositories.",
     icon: "/images/community-icon-codebase.png",
     image: "/images/community-code.png",
     imageHeight: 350,

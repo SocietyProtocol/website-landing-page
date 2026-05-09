@@ -79,7 +79,7 @@ export default function Join() {
               </h3>
               <div className="mt-auto">
                 <NewsletterForm variant="underline" />
-                <p className="font-body text-[20px] text-[#C2C2C2] mt-3">
+                <p className="font-body text-[20px] text-[var(--color-text-light)] mt-3">
                   Subscribe to our newsletter to stay in the loop
                 </p>
               </div>
@@ -107,7 +107,7 @@ export default function Join() {
               <h3 className="font-display text-[38px] font-normal leading-[1] mb-2">
                 Join the Discord
               </h3>
-              <p className="font-body text-[20px] text-[#BFBCBC]">
+              <p className="font-body text-[20px] text-[var(--color-text-light)]">
                 Meet like minded people passionate about building.
               </p>
             </div>
@@ -134,8 +134,8 @@ export default function Join() {
               <h3 className="font-display text-[38px] font-normal leading-[1] mb-2">
                 Explore the Forum
               </h3>
-              <p className="font-body text-[20px] text-[#BFBCBC]">
-                Meet like minded people passionate about building.
+              <p className="font-body text-[20px] text-[var(--color-text-light)]">
+                A living archive of the Society Protocol movement.
               </p>
             </div>
           </a>
@@ -161,8 +161,8 @@ export default function Join() {
               <h3 className="font-display text-[38px] font-normal leading-[1] mb-2">
                 Join the VIP Community
               </h3>
-              <p className="font-body text-[20px] text-[#BFBCBC]">
-                Meet like minded people passionate about building.
+              <p className="font-body text-[20px] text-[var(--color-text-light)]">
+                Access exclusive content reserved for committed community members.
               </p>
             </div>
           </a>
@@ -188,8 +188,8 @@ export default function Join() {
               <h3 className="font-display text-[38px] font-normal leading-[1] mb-2">
                 Explore the Codebase
               </h3>
-              <p className="font-body text-[20px] text-[#BFBCBC]">
-                Meet like minded people passionate about building.
+              <p className="font-body text-[20px] text-[var(--color-text-light)]">
+                Discover our community's public repositories.
               </p>
             </div>
           </a>

@@ -191,9 +191,8 @@ export default function ArticlesPageClient({
         <h2 className="font-display text-3xl md:text-[52.69px] font-normal leading-[0.7] mb-4">
           Our Blog
         </h2>
-        <p className="font-body text-[20px] text-[#7A7A7A] leading-[119%] max-w-2xl">
-          Plug into a growing network of builders, systems thinkers, and aligned
-          visionaries shaping the future of coordination.
+        <p className="font-body text-[20px] text-[var(--color-text-light)] leading-[119%] max-w-2xl">
+          Plug into a growing library of content explaining the evolutionary nature of Synchronized States.
         </p>
       </section>
 

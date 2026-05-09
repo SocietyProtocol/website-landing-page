@@ -16,7 +16,7 @@ export default function About() {
         <span className="font-mono text-[18px] tracking-widest text-[#7A7A7A] mb-10 block">
           / Mission Statement
         </span>
-        <h1 className="font-display text-3xl md:text-[44px] font-normal leading-[1] max-w-4xl">
+        <h1 className="font-display text-3xl md:text-[44px] text-[var(--color-text-slate)] font-normal leading-[1] max-w-4xl">
           Rewiring society for a future where people, not institutions, own
           their identity, trust, and value.
         </h1>
@@ -36,10 +36,10 @@ export default function About() {
             />
           </div>
           <div className="flex flex-col justify-center">
-            <h2 className="font-display text-2xl md:text-[32px] font-normal mb-6">
+            <h2 className="font-display text-[var(--color-text-slate)] text-2xl md:text-[32px] font-normal mb-6">
               Building a movement
             </h2>
-            <p className="font-body text-[20px] text-[#ADADAD] leading-[1.1]">
+            <p className="font-body text-[20px] text-[var(--color-text-light)] leading-[1.1]">
               We are gathered because society is on the verge of a radical
               transformation driven by sheer technological innovation from
               Nation States to Synchronized States. We believe that
@@ -47,7 +47,7 @@ export default function About() {
               clearly discernible advantages and offer the promise of a better
               world for humanity.
             </p>
-            <p className="font-body text-[20px] text-[#ADADAD] leading-[1.1] mt-6">
+            <p className="font-body text-[20px] text-[var(--color-text-light)] leading-[1.1] mt-6">
               We are gathered as a distributed and decentralized movement to
               fulfill the promise of accomplishing this transition while
               remaining true to its ideological foundations.
@@ -81,7 +81,7 @@ export default function About() {
               <h2 className="font-display text-[32px] font-normal mb-6">
                 Building a movement
               </h2>
-              <p className="font-body text-[20px] text-[#ADADAD] leading-[1.1]">
+              <p className="font-body text-[20px] text-[var(--color-text-light)] leading-[1.1]">
                 We are gathered because society is on the verge of a radical
                 transformation driven by sheer technological innovation from
                 Nation States to Synchronized States. We believe that
@@ -89,7 +89,7 @@ export default function About() {
                 clearly discernible advantages and offer the promise of a better
                 world for humanity.
               </p>
-              <p className="font-body text-[20px] text-[#ADADAD] leading-[1.1] mt-6">
+              <p className="font-body text-[20px] text-[var(--color-text-light)] leading-[1.1] mt-6">
                 We are gathered as a distributed and decentralized movement to
                 fulfill the promise of accomplishing this transition while
                 remaining true to its ideological foundations.
@@ -113,7 +113,7 @@ export default function About() {
       {/* 3. Explore Our Core Values */}
       <section className="max-w-[1400px] mx-auto px-8 pb-32">
         <div className="flex items-start justify-between mb-4">
-          <h2 className="font-heading text-3xl md:text-[42px] font-normal">
+          <h2 className="font-heading text-[var(--color-text-slate)] text-3xl md:text-[42px] font-normal">
             Explore Our Core Values
           </h2>
           <Link
@@ -161,7 +161,7 @@ export default function About() {
             </svg>
           </Link>
         </div>
-        <p className="font-heading text-[21px] text-[#ADADAD] leading-[1.1] max-w-3xl mb-10">
+        <p className="font-heading text-[21px] text-[var(--color-text-light)] leading-[1.1] max-w-3xl mb-10">
           Values are the operating system that society functions on. Explore the
           core values that Society Protocol is built around.
         </p>
