@@ -189,7 +189,7 @@ export default function Join() {
                 Explore the Codebase
               </h3>
               <p className="font-body text-[20px] text-[var(--color-text-light)]">
-                Discover our community's public repositories.
+                Discover our community&apos;s public repositories.
               </p>
             </div>
           </a>
