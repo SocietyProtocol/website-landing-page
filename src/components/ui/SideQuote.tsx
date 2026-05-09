@@ -24,7 +24,7 @@ export default function SideQuote({ title, children }: SideQuoteProps) {
       </div>
 
       {/* Mobile: inline callout */}
-      <aside className="not-prose md:hidden my-4 rounded-[40px] border border-[#505050] bg-[#1a1f2a] p-4">
+      <aside className="not-prose lg:hidden my-4 rounded-[40px] border border-[#505050] bg-[#1a1f2a] p-4">
         {content}
       </aside>
     </>
