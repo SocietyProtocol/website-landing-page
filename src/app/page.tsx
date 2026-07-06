@@ -114,7 +114,7 @@ export default function Home() {
       <section className="relative py-16 overflow-hidden">
         <div className="relative max-w-[1400px] mx-auto px-8 text-center">
           <h2 className="font-display text-4xl md:text-[45px] font-normal leading-[1] mb-5">
-            Welcome to Web 4
+            Welcome to the Age of Synchronicity
           </h2>
           <p className="font-display text-lg md:text-[23px] leading-[1] text-[#EDEDED] max-w-3xl mx-auto">
             Bringing identity, currency, and history onto an immutable Timeline
