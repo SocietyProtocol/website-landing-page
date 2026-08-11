@@ -110,7 +110,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. Welcome to Web 4 */}
+      {/* 3. Welcome to the Age of Synchronicity */}
       <section className="relative py-16 overflow-hidden">
         <div className="relative max-w-[1400px] mx-auto px-8 text-center">
           <h2 className="font-display text-4xl md:text-[45px] font-normal leading-[1] mb-5">
