@@ -21,8 +21,10 @@ export default function Roles() {
               Roles
             </h1>
             <p className="font-body text-[20px] text-[var(--color-text-light)] leading-[119%] max-w-2xl mt-6">
-              We are seeking <em className="text-white not-italic">mission-aligned</em> contributors
-              for some early roles to help us bring Society Protocol to life.
+              We are seeking <em className="text-white not-italic">mission-aligned</em> team members
+              for some early roles to help us bring Society Protocol to life.<br/> 
+
+              Our team is entirely distributed; all roles are fully remote.<br/>
               Reach out at{" "}
               <a
                 href={`mailto:${CAREERS_EMAIL}`}
