@@ -7,13 +7,12 @@
     })
     return str
   }
-  export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+  /** Internal type. DO NOT USE DIRECTLY. */
+type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+/** Internal type. DO NOT USE DIRECTLY. */
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -776,152 +775,251 @@ export type TeamMutation = {
   lensUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type PostsPartsFragment = { __typename: 'Posts', title: string, slug: string, description?: string | null, date?: string | null, author?: string | null, image?: string | null, cardImage?: string | null, isIntro?: boolean | null, order?: number | null, body?: string | null };
+export type StringFilter = {
+  startsWith?: string | null | undefined;
+  eq?: string | null | undefined;
+  exists?: boolean | null | undefined;
+  in?: Array<string | null | undefined> | null | undefined;
+};
 
-export type RolesPartsFragment = { __typename: 'Roles', title: string, slug: string, emoji?: string | null, commitment: string, responsibilities: string, requirements: string };
+export type DatetimeFilter = {
+  after?: string | null | undefined;
+  before?: string | null | undefined;
+  eq?: string | null | undefined;
+  exists?: boolean | null | undefined;
+  in?: Array<string | null | undefined> | null | undefined;
+};
 
-export type RoadmapPartsFragment = { __typename: 'Roadmap', title: string, slug: string, description?: string | null, body?: string | null };
+export type ImageFilter = {
+  startsWith?: string | null | undefined;
+  eq?: string | null | undefined;
+  exists?: boolean | null | undefined;
+  in?: Array<string | null | undefined> | null | undefined;
+};
 
-export type WhitepaperPartsFragment = { __typename: 'Whitepaper', title: string, slug: string, description?: string | null, body?: string | null };
+export type BooleanFilter = {
+  eq?: boolean | null | undefined;
+  exists?: boolean | null | undefined;
+};
 
-export type GlossaryPartsFragment = { __typename: 'Glossary', title: string, slug: string, description?: string | null, body?: string | null };
+export type NumberFilter = {
+  lt?: number | null | undefined;
+  lte?: number | null | undefined;
+  gte?: number | null | undefined;
+  gt?: number | null | undefined;
+  eq?: number | null | undefined;
+  exists?: boolean | null | undefined;
+  in?: Array<number | null | undefined> | null | undefined;
+};
 
-export type IdeologyPartsFragment = { __typename: 'Ideology', title: string, slug: string, description?: string | null, body?: string | null };
+export type PostsFilter = {
+  title?: StringFilter | null | undefined;
+  slug?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  date?: DatetimeFilter | null | undefined;
+  author?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
+  cardImage?: ImageFilter | null | undefined;
+  isIntro?: BooleanFilter | null | undefined;
+  order?: NumberFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+};
 
-export type TeamPartsFragment = { __typename: 'Team', title: string, slug: string, role: string, jobTitle: string, image?: string | null, order: number, xUrl?: string | null, farcasterUrl?: string | null, lensUrl?: string | null };
+export type RolesFilter = {
+  title?: StringFilter | null | undefined;
+  slug?: StringFilter | null | undefined;
+  emoji?: StringFilter | null | undefined;
+  commitment?: StringFilter | null | undefined;
+  responsibilities?: StringFilter | null | undefined;
+  requirements?: StringFilter | null | undefined;
+};
+
+export type RoadmapFilter = {
+  title?: StringFilter | null | undefined;
+  slug?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+};
+
+export type WhitepaperFilter = {
+  title?: StringFilter | null | undefined;
+  slug?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+};
+
+export type GlossaryFilter = {
+  title?: StringFilter | null | undefined;
+  slug?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+};
+
+export type IdeologyFilter = {
+  title?: StringFilter | null | undefined;
+  slug?: StringFilter | null | undefined;
+  description?: StringFilter | null | undefined;
+  body?: StringFilter | null | undefined;
+};
+
+export type TeamFilter = {
+  title?: StringFilter | null | undefined;
+  slug?: StringFilter | null | undefined;
+  role?: StringFilter | null | undefined;
+  jobTitle?: StringFilter | null | undefined;
+  image?: ImageFilter | null | undefined;
+  order?: NumberFilter | null | undefined;
+  xUrl?: StringFilter | null | undefined;
+  farcasterUrl?: StringFilter | null | undefined;
+  lensUrl?: StringFilter | null | undefined;
+};
+
+export type PostsPartsFragment = { __typename: 'Posts', title: string, slug: string, description: string | null, date: string | null, author: string | null, image: string | null, cardImage: string | null, isIntro: boolean | null, order: number | null, body: string | null };
+
+export type RolesPartsFragment = { __typename: 'Roles', title: string, slug: string, emoji: string | null, commitment: string, responsibilities: string, requirements: string };
+
+export type RoadmapPartsFragment = { __typename: 'Roadmap', title: string, slug: string, description: string | null, body: string | null };
+
+export type WhitepaperPartsFragment = { __typename: 'Whitepaper', title: string, slug: string, description: string | null, body: string | null };
+
+export type GlossaryPartsFragment = { __typename: 'Glossary', title: string, slug: string, description: string | null, body: string | null };
+
+export type IdeologyPartsFragment = { __typename: 'Ideology', title: string, slug: string, description: string | null, body: string | null };
+
+export type TeamPartsFragment = { __typename: 'Team', title: string, slug: string, role: string, jobTitle: string, image: string | null, order: number, xUrl: string | null, farcasterUrl: string | null, lensUrl: string | null };
 
 export type PostsQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type PostsQuery = { __typename?: 'Query', posts: { __typename: 'Posts', id: string, title: string, slug: string, description?: string | null, date?: string | null, author?: string | null, image?: string | null, cardImage?: string | null, isIntro?: boolean | null, order?: number | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PostsQuery = { posts: { __typename: 'Posts', id: string, title: string, slug: string, description: string | null, date: string | null, author: string | null, image: string | null, cardImage: string | null, isIntro: boolean | null, order: number | null, body: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PostsConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PostsFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: PostsFilter | null | undefined;
 }>;
 
 
-export type PostsConnectionQuery = { __typename?: 'Query', postsConnection: { __typename?: 'PostsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PostsConnectionEdges', cursor: string, node?: { __typename: 'Posts', id: string, title: string, slug: string, description?: string | null, date?: string | null, author?: string | null, image?: string | null, cardImage?: string | null, isIntro?: boolean | null, order?: number | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PostsConnectionQuery = { postsConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Posts', id: string, title: string, slug: string, description: string | null, date: string | null, author: string | null, image: string | null, cardImage: string | null, isIntro: boolean | null, order: number | null, body: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type RolesQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type RolesQuery = { __typename?: 'Query', roles: { __typename: 'Roles', id: string, title: string, slug: string, emoji?: string | null, commitment: string, responsibilities: string, requirements: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type RolesQuery = { roles: { __typename: 'Roles', id: string, title: string, slug: string, emoji: string | null, commitment: string, responsibilities: string, requirements: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type RolesConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<RolesFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: RolesFilter | null | undefined;
 }>;
 
 
-export type RolesConnectionQuery = { __typename?: 'Query', rolesConnection: { __typename?: 'RolesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'RolesConnectionEdges', cursor: string, node?: { __typename: 'Roles', id: string, title: string, slug: string, emoji?: string | null, commitment: string, responsibilities: string, requirements: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type RolesConnectionQuery = { rolesConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Roles', id: string, title: string, slug: string, emoji: string | null, commitment: string, responsibilities: string, requirements: string, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type RoadmapQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type RoadmapQuery = { __typename?: 'Query', roadmap: { __typename: 'Roadmap', id: string, title: string, slug: string, description?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type RoadmapQuery = { roadmap: { __typename: 'Roadmap', id: string, title: string, slug: string, description: string | null, body: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type RoadmapConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<RoadmapFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: RoadmapFilter | null | undefined;
 }>;
 
 
-export type RoadmapConnectionQuery = { __typename?: 'Query', roadmapConnection: { __typename?: 'RoadmapConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'RoadmapConnectionEdges', cursor: string, node?: { __typename: 'Roadmap', id: string, title: string, slug: string, description?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type RoadmapConnectionQuery = { roadmapConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Roadmap', id: string, title: string, slug: string, description: string | null, body: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type WhitepaperQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type WhitepaperQuery = { __typename?: 'Query', whitepaper: { __typename: 'Whitepaper', id: string, title: string, slug: string, description?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type WhitepaperQuery = { whitepaper: { __typename: 'Whitepaper', id: string, title: string, slug: string, description: string | null, body: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type WhitepaperConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<WhitepaperFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: WhitepaperFilter | null | undefined;
 }>;
 
 
-export type WhitepaperConnectionQuery = { __typename?: 'Query', whitepaperConnection: { __typename?: 'WhitepaperConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'WhitepaperConnectionEdges', cursor: string, node?: { __typename: 'Whitepaper', id: string, title: string, slug: string, description?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type WhitepaperConnectionQuery = { whitepaperConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Whitepaper', id: string, title: string, slug: string, description: string | null, body: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type GlossaryQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type GlossaryQuery = { __typename?: 'Query', glossary: { __typename: 'Glossary', id: string, title: string, slug: string, description?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type GlossaryQuery = { glossary: { __typename: 'Glossary', id: string, title: string, slug: string, description: string | null, body: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type GlossaryConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<GlossaryFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: GlossaryFilter | null | undefined;
 }>;
 
 
-export type GlossaryConnectionQuery = { __typename?: 'Query', glossaryConnection: { __typename?: 'GlossaryConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'GlossaryConnectionEdges', cursor: string, node?: { __typename: 'Glossary', id: string, title: string, slug: string, description?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type GlossaryConnectionQuery = { glossaryConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Glossary', id: string, title: string, slug: string, description: string | null, body: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type IdeologyQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type IdeologyQuery = { __typename?: 'Query', ideology: { __typename: 'Ideology', id: string, title: string, slug: string, description?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type IdeologyQuery = { ideology: { __typename: 'Ideology', id: string, title: string, slug: string, description: string | null, body: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type IdeologyConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<IdeologyFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: IdeologyFilter | null | undefined;
 }>;
 
 
-export type IdeologyConnectionQuery = { __typename?: 'Query', ideologyConnection: { __typename?: 'IdeologyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'IdeologyConnectionEdges', cursor: string, node?: { __typename: 'Ideology', id: string, title: string, slug: string, description?: string | null, body?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type IdeologyConnectionQuery = { ideologyConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Ideology', id: string, title: string, slug: string, description: string | null, body: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type TeamQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
+  relativePath: string;
 }>;
 
 
-export type TeamQuery = { __typename?: 'Query', team: { __typename: 'Team', id: string, title: string, slug: string, role: string, jobTitle: string, image?: string | null, order: number, xUrl?: string | null, farcasterUrl?: string | null, lensUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type TeamQuery = { team: { __typename: 'Team', id: string, title: string, slug: string, role: string, jobTitle: string, image: string | null, order: number, xUrl: string | null, farcasterUrl: string | null, lensUrl: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type TeamConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<TeamFilter>;
+  before?: string | null | undefined;
+  after?: string | null | undefined;
+  first?: number | null | undefined;
+  last?: number | null | undefined;
+  sort?: string | null | undefined;
+  filter?: TeamFilter | null | undefined;
 }>;
 
 
-export type TeamConnectionQuery = { __typename?: 'Query', teamConnection: { __typename?: 'TeamConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TeamConnectionEdges', cursor: string, node?: { __typename: 'Team', id: string, title: string, slug: string, role: string, jobTitle: string, image?: string | null, order: number, xUrl?: string | null, farcasterUrl?: string | null, lensUrl?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type TeamConnectionQuery = { teamConnection: { totalCount: number, pageInfo: { hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges: Array<{ cursor: string, node: { __typename: 'Team', id: string, title: string, slug: string, role: string, jobTitle: string, image: string | null, order: number, xUrl: string | null, farcasterUrl: string | null, lensUrl: string | null, _sys: { filename: string, basename: string, hasReferences: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const PostsPartsFragmentDoc = gql`
     fragment PostsParts on Posts {
@@ -1502,5 +1600,7 @@ export const queries = (
   const requester = generateRequester(client)
   return getSdk(requester)
 }
+
+export type { Exact };
 
   
